@@ -1,0 +1,7 @@
+<h1>All Playdays</h1>
+
+erase this...use as calendar helper? use id for show/id route: <%= Playday.find_by(date:"03/22/2016").id %>
+
+<% @playdays.each do |playday| %>
+  <p><%= link_to playday.date, playday_path(playday.id) %></p>
+<% end %>
