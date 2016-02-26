@@ -15,7 +15,7 @@ playdate = (Date.today+1)
     six_pm: 15,
     seven_pm: 15,
     eight_pm: 15,
-    date: playdate.strftime("%m/%d/%Y").to_s
+    date: playdate.strftime("%m-%d-%Y").to_s
   )
   playdate += 1
 end
