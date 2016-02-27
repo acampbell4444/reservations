@@ -30,7 +30,7 @@ class PlaydaysController < ApplicationController
     if !(id == "")
       redirect_to playday_path(id)
     else
-      flash.now[:notice] = 'Please Enter a Valid Date.'
+      redirect_to(root_url, :notice => "Must Enter a Valid Date.")
     end
   end
 
