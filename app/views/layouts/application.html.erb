@@ -16,6 +16,29 @@
       <li><%= link_to "PlayDaysIndex", playdays_path %></li>
       <li><%= link_to "MyReservations"%></li>
     </ul>
+    <h4>Search Availabilities by Date</h4>
+
+    <%= simple_form_for :playday, :defaults => {:required => false}, url: :playdays do |f| %>
+      <%= f.input :date, placeholder: "Choose a Date", label: false, :input_html => {:style => 'float:left;width: 28%'} %>
+      <%= f.button :submit, 'Check Availability!' %>
+    <% end %>
+
+    <% if flash[:notice] %>
+      <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:notice] %>
+      </div>
+    <% elsif flash.now[:alert] %>
+      <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash.now[:alert] %>
+      </div>
+    <% elsif flash[:alert] %>
+      <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
 
     <%= yield %>
   </div>

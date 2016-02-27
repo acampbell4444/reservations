@@ -1,19 +1,1 @@
-<h1>All Playdays</h1>
 
-<%= simple_form_for :playday, :defaults => {:required => false}, url: :playdays do |f| %>
-  <%= f.input :date %>
-  <%= f.button :submit, 'Check Availability!' %>
-<% end %>
-
-
-
-<% if @playdays.present? %>
-  <% @playdays.each do |playday| %>
-    <p><%= link_to playday.date, playday_path(playday.date) %>
-    </p>
-    <%slots_available = playday.seven_am + playday.eight_am + playday.nine_am + playday.ten_am + playday.eleven_am + playday.twelve_pm + playday.one_pm + playday.two_pm + playday.three_pm + playday.four_pm  + playday.five_pm  + playday.six_pm  + playday.seven_pm + playday.eight_pm %>
-    <% #slots_available %>
-  <% end %>
-<% else %>
-  <p>There are no playdays containing the term(s) <%= params[:search] %>.</p>
-<% end %>

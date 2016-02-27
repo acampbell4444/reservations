@@ -10,6 +10,9 @@ class PlaydaysController < ApplicationController
 
   def show
     @playday = Playday.friendly.find(params[:id])#id
+  rescue ActiveRecord::RecordNotFound
+    redirect_to(root_url, :notice => "Must Choose a Date Later than Today's Date.")
+
   end
 
   def new
@@ -24,7 +27,11 @@ class PlaydaysController < ApplicationController
 
   def create
     id = params[:playday][:date]
-    redirect_to playday_path(id)
+    if !(id == "")
+      redirect_to playday_path(id)
+    else
+      flash.now[:notice] = 'Please Enter a Valid Date.'
+    end
   end
 
   def destroy
