@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
 
+  get 'reservations/new'
+
+  get 'reservations/create'
+
+  get 'reservations/edit'
+
+  get 'reservations/update'
+
+  get 'reservations/show'
+
+  get 'reservations/delete'
+
   resources :playdays
 
   root 'playdays#index'
