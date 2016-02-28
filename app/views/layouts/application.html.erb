@@ -6,8 +6,8 @@
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css", "application" %>
-  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js", "application" %>
+  <%= stylesheet_link_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css", "application" %>
+  <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js", "application" %>
 </head>
 <body>
   <ul>
@@ -23,7 +23,7 @@
         <li style="font-weight:bold"><%= link_to "Sign In", new_user_session_path, :class => 'navbar-link'  %></li>
         <% end%>
       <div class="row">
-      <li style="padding-left:540px; padding-bottom: 20px">  <%= simple_form_for :playday, :defaults => {:required => false}, url: :playdays, wrapper_html: {class: "form-inline"} do |f| %>
+      <li style="padding-left:540px; padding-bottom: 20px">  <%= simple_form_for :playday, :defaults => {:required => false}, url: :playdays, wrapper_html: {class: "form-inline"}, 'data-no-turbolink' => true do |f| %>
           <%= f.input :date, placeholder: "Click Here to Select Date", label: false, :input_html => {:style => 'float: left; width: 60%'} %>
           <%= f.button :submit, 'Check Availability and Reserve!', :class => "btn-primary", :input_html => {:style => 'float:right'} %>
         <% end %></li>
