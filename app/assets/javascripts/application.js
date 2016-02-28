@@ -2,6 +2,10 @@ $(function() {
   $("#playday_date").datepicker({ dateFormat: 'mm-dd-yy' });
 });
 
+$(function() {
+  $("#reservation_date").datepicker({ dateFormat: 'mm-dd-yy' });
+});
+
 //$(function() {
 //  $("#reservation_six_hundred").change(function(){
 //    var six_hundred = $(this).val();

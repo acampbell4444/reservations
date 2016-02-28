@@ -1,8 +1,9 @@
 class Reservation < ActiveRecord::Base
+
+  attr_accessor :slug
   belongs_to :playday
   belongs_to :user
 
-  def total_price
-    (self.six_hundred * 65) + (self.eight_hundred * 75)
-  end
+  extend FriendlyId
+    friendly_id :playday_id, use: :slugged
 end

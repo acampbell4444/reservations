@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
 
- resources :calculators
+  resources :calculators
 
   devise_for :users
 
+  devise_scope :user do
+     get '/users/sign_out' => 'devise/sessions#destroy'
+  end
+
   resources :playdays do
     resources :reservations do
-      member do
-        get :price
-      end
     end
   end
 

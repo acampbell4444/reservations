@@ -1,5 +1,6 @@
 class PlaydaysController < ApplicationController
   def index
+    @reservation = Reservation.new
     @calculator = Calculator.new
     @playdays = Playday.all
       if params[:search]
@@ -10,6 +11,7 @@ class PlaydaysController < ApplicationController
   end
 
   def show
+    @reservation = Reservation.new
     @playday = Playday.friendly.find(params[:id])#id
   rescue ActiveRecord::RecordNotFound
     redirect_to(root_url, :notice => "Must Choose a Date Later than Today's Date.")

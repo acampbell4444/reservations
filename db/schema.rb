@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160227203704) do
+ActiveRecord::Schema.define(version: 20160228083707) do
 
   create_table "calculators", force: :cascade do |t|
     t.integer  "eight_hundred"
@@ -69,9 +69,12 @@ ActiveRecord::Schema.define(version: 20160227203704) do
     t.integer  "playday_id"
     t.string   "discount"
     t.integer  "user_id"
+    t.integer  "photo"
+    t.string   "slug"
   end
 
   add_index "reservations", ["playday_id"], name: "index_reservations_on_playday_id"
+  add_index "reservations", ["slug"], name: "index_reservations_on_slug"
   add_index "reservations", ["user_id"], name: "index_reservations_on_user_id"
 
   create_table "users", force: :cascade do |t|

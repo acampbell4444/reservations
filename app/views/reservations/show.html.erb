@@ -1,19 +1,9 @@
 <h1>Reservations#show</h1>
 <p>Find me in app/views/reservations/show.html.erb</p>
 
-<%= @reservation.six_hundred %><br>
-<%= @reservation.eight_hundred %><br>
-<%= @reservation.date%><br>
-<%= @reservation.time %><br>
-
-<%= simple_form_for :reservation do |f| %>
-  <%= f.input :six_hundred %>
-  <%= f.input :eight_hundred %>
-  <%= f.input :date%>
-  <%= f.input :time %>
-  <%= f.button :submit, "Go To Checkout" %>
-<% end %>
-
-<p id="price">
-  $<%= @reservation.total_price %>
-</p>
+600': <%= @reservation.six_hundred %><br>
+800': <%= @reservation.eight_hundred %><br>
+Date: <%= @reservation.date%><br>
+Time: <%= @reservation.time %><br>
+Photo: <%=@reservation.photo %><br>
+Discount: <%=@reservation.discount %><br>

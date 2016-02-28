@@ -1,16 +1,44 @@
 <br>
-<h2><%= @playday.date %> <small> Available seats</small></h2><br>
-<strong>7:00am:</strong>&nbsp&nbsp <%= @playday.seven_am %> seats available | <%= link_to "CreateReservation", new_playday_reservation_path(@playday),  style:"font-weight:bold" %><br><br>
-<strong>8:00am:</strong>&nbsp&nbsp <%= @playday.eight_am %> seats available | <%= link_to "CreateReservation",  style:"font-weight:bold" %><br><br>
-<strong>9:00am:</strong>&nbsp&nbsp <%= @playday.nine_am %> seats available | <%= link_to "CreateReservation",  style:"font-weight:bold" %><br><br>
-<strong>10:00am:</strong> <%= @playday.ten_am %> seats available | <%= link_to "CreateReservation",  style:"font-weight:bold" %><br><br>
-<strong>11:00am:</strong> <%= @playday.eleven_am %> seats available | <%= link_to "CreateReservation",  style:"font-weight:bold" %><br><br>
-<strong>12:00pm:</strong> <%= @playday.twelve_pm %> seats available | <%= link_to "CreateReservation",  style:"font-weight:bold" %><br><br>
-<strong>1:00pm:</strong>&nbsp&nbsp  <%= @playday.one_pm %> seats available | <%= link_to "CreateReservation",  style:"font-weight:bold" %><br><br>
-<strong>2:00pm:</strong>&nbsp&nbsp <%= @playday.two_pm %> seats available | <%= link_to "CreateReservation",  style:"font-weight:bold" %><br><br>
-<strong>3:00pm:</strong>&nbsp&nbsp <%= @playday.three_pm %> seats available | <%= link_to "CreateReservation",  style:"font-weight:bold" %><br><br>
-<strong>4:00pm:</strong>&nbsp&nbsp <%= @playday.four_pm %> seats available | <%= link_to "CreateReservation",  style:"font-weight:bold" %><br><br>
-<strong>5:00pm:</strong>&nbsp&nbsp <%= @playday.five_pm %> seats available | <%= link_to "CreateReservation",  style:"font-weight:bold" %><br><br>
-<strong>6:00pm:</strong>&nbsp&nbsp <%= @playday.six_pm %> seats available | <%= link_to "CreateReservation",  style:"font-weight:bold" %><br><br>
-<strong>7:00pm:</strong>&nbsp&nbsp <%= @playday.seven_pm %> seats available | <%= link_to "CreateReservation",  style:"font-weight:bold" %><br><br>
-<strong>8:00pm:</strong>&nbsp&nbsp <%= @playday.eight_pm %> seats available | <%= link_to "CreateReservation",  style:"font-weight:bold" %><br><br>
+<div style="float:left">
+<div class="jumbotron">
+<h2><%= @playday.date %> <br><small><small> Available seats</small></small></h2>
+<strong>7:00am:</strong>&nbsp&nbsp <%= @playday.seven_am %> seats available <br><br>
+<strong>8:00am:</strong>&nbsp&nbsp <%= @playday.eight_am %> seats available  <br><br>
+<strong>9:00am:</strong>&nbsp&nbsp <%= @playday.nine_am %> seats available  <br><br>
+<strong>10:00am:</strong> <%= @playday.ten_am %> seats available  <br><br>
+<strong>11:00am:</strong> <%= @playday.eleven_am %> seats available  <br><br>
+<strong>12:00pm:</strong> <%= @playday.twelve_pm %> seats available  <br><br>
+<strong>1:00pm:</strong>&nbsp&nbsp  <%= @playday.one_pm %> seats available  <br><br>
+<strong>2:00pm:</strong>&nbsp&nbsp <%= @playday.two_pm %> seats available  <br><br>
+<strong>3:00pm:</strong>&nbsp&nbsp <%= @playday.three_pm %> seats available  <br><br>
+<strong>4:00pm:</strong>&nbsp&nbsp <%= @playday.four_pm %> seats available  <br><br>
+<strong>5:00pm:</strong>&nbsp&nbsp <%= @playday.five_pm %> seats available  <br><br>
+<strong>6:00pm:</strong>&nbsp&nbsp <%= @playday.six_pm %> seats available  <br><br>
+<strong>7:00pm:</strong>&nbsp&nbsp <%= @playday.seven_pm %> seats available  <br><br>
+<strong>8:00pm:</strong>&nbsp&nbsp <%= @playday.eight_pm %> seats available  <br><br>
+</div>
+</div>
+
+<% if current_user.present? %>
+  <div style= "float:right; padding-right: 150px">
+  <div class="jumbotron">
+    <h2>Make Your Reservation</h2>
+
+    <%= simple_form_for [@playday, @reservation] do |f| %>
+
+    <%= @playday.date %>
+    <%= @playday.slug %>
+
+    <%= f.input :six_hundred %>
+    <%= f.input :eight_hundred %>
+    <%= f.input :photo, :input_html => {:style => 'width: 25%'}%>
+    <%= f.input :discount, :input_html => {:style => 'width: 25%'} %>
+    <%= f.input :time %>
+    <%= f.input :date %>
+    <%= f.button :submit %>
+    <% end %>
+  </div>
+  </div>
+<% else %>
+Put Some shit about logging in here
+<% end %>

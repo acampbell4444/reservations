@@ -15,10 +15,17 @@
     <ul class="nav nav-tabs">
       <li><%= link_to "Home", playdays_path %></li>
       <li><%= link_to "MyReservations"%></li>
+      <% if user_signed_in? %>
+        <li> <%= link_to "#{current_user.email}", edit_user_registration_path, style: "color:orange" %></li>
+         <li><%= link_to "SignOut", destroy_user_session_path, method: :delete, class: 'navbar-link'  %></li>
+      <% else %>
+        <li style="font-weight:bold"><%= link_to "Sign Up", new_user_registration_path, :class => 'navbar-link'  %></li>
+        <li style="font-weight:bold"><%= link_to "Sign In", new_user_session_path, :class => 'navbar-link'  %></li>
+        <% end%>
       <div class="row">
-      <li style="padding-left: 500px; padding-bottom: 20px">  <%= simple_form_for :playday, :defaults => {:required => false}, url: :playdays, wrapper_html: {class: "form-inline"} do |f| %>
-          <%= f.input :date, placeholder: "Click Here to Select Date", label: false, :input_html => {:style => 'float: left; width: 55%'} %>
-          <%= f.button :submit, 'Check Availability!', :class => "btn-primary", :input_html => {:style => 'float:right'} %>
+      <li style="padding-left:540px; padding-bottom: 20px">  <%= simple_form_for :playday, :defaults => {:required => false}, url: :playdays, wrapper_html: {class: "form-inline"} do |f| %>
+          <%= f.input :date, placeholder: "Click Here to Select Date", label: false, :input_html => {:style => 'float: left; width: 60%'} %>
+          <%= f.button :submit, 'Check Availability and Reserve!', :class => "btn-primary", :input_html => {:style => 'float:right'} %>
         <% end %></li>
       </div>
     </ul>
