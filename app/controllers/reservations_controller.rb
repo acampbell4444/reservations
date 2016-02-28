@@ -17,6 +17,7 @@ class ReservationsController < ApplicationController
       @playday = Playday.friendly.find(params[:playday_id])
       @reservation = @playday.reservations.new(reservation_params)
       @reservation.user = current_user
+      @reservation.date = @playday.date
 
       if @reservation.save
         update_playday_timeslots
