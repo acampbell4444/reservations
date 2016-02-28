@@ -1,5 +1,6 @@
 class PlaydaysController < ApplicationController
   def index
+    @calculator = Calculator.new
     @playdays = Playday.all
       if params[:search]
         @playdays = Playday.search(params[:search])

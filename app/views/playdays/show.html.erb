@@ -1,6 +1,6 @@
 <br>
 <h2><%= @playday.date %> <small> Available seats</small></h2><br>
-<strong>7:00am:</strong>&nbsp&nbsp <%= @playday.seven_am %> seats available | <%= link_to "CreateReservation",  style:"font-weight:bold" %><br><br>
+<strong>7:00am:</strong>&nbsp&nbsp <%= @playday.seven_am %> seats available | <%= link_to "CreateReservation", new_playday_reservation_path(@playday),  style:"font-weight:bold" %><br><br>
 <strong>8:00am:</strong>&nbsp&nbsp <%= @playday.eight_am %> seats available | <%= link_to "CreateReservation",  style:"font-weight:bold" %><br><br>
 <strong>9:00am:</strong>&nbsp&nbsp <%= @playday.nine_am %> seats available | <%= link_to "CreateReservation",  style:"font-weight:bold" %><br><br>
 <strong>10:00am:</strong> <%= @playday.ten_am %> seats available | <%= link_to "CreateReservation",  style:"font-weight:bold" %><br><br>

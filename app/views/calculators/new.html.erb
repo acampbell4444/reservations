@@ -1,0 +1,9 @@
+<h1>Calculators#new</h1>
+<p>Find me in app/views/calculators/new.html.erb</p>
+<%= simple_form_for @calculator do |f| %>
+<%= f.input :six_hundred, collection: 0..15%>
+<%= f.input :eight_hundred, collection: 0..15%>
+<%= f.input :discount_code %>
+<%= f.input :photo_package, collection: 0..3%>
+<%= f.button :submit, "Calculate Total" %>
+<% end %>

@@ -1,22 +1,7 @@
-<h1>Reservations#new</h1>
-<p>Find me in app/views/reservations/new.html.erb</p>
-<%= @playday.seven_am %>
+<h2>Sign up</h2>
 
-
-
-<%= simple_form_for [@playday, @reservation] do |f| %>
-  <%= f.input :six_hundred %>
-  <%= f.input :eight_hundred %>
-  <%= f.input :date%>
-  <%= f.input :time %>
-  <%= f.button :submit, "Go To Checkout" %>
-<% end %>
-
-
-<% if false %>
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
-
 
   <div class="form-inputs">
     <%= f.input :email, required: true, autofocus: true %>
@@ -30,4 +15,3 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
-<% end %>

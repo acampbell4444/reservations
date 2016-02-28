@@ -2,6 +2,18 @@ $(function() {
   $("#playday_date").datepicker({ dateFormat: 'mm-dd-yy' });
 });
 
+//$(function() {
+//  $("#reservation_six_hundred").change(function(){
+//    var six_hundred = $(this).val();
+//    jQuery.getJSON(window.location.href + "/price"), {six_hundred: six_hundred}, function(data){
+//      $("price").text("$" + data.total_price);
+//    });
+//    });
+
+
+
+
+
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //

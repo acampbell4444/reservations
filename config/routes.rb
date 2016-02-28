@@ -1,18 +1,18 @@
 Rails.application.routes.draw do
 
-  get 'reservations/new'
+ resources :calculators
 
-  get 'reservations/create'
+  devise_for :users
 
-  get 'reservations/edit'
+  resources :playdays do
+    resources :reservations do
+      member do
+        get :price
+      end
+    end
+  end
 
-  get 'reservations/update'
 
-  get 'reservations/show'
-
-  get 'reservations/delete'
-
-  resources :playdays
 
   root 'playdays#index'
 

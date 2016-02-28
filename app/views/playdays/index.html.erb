@@ -1,1 +1,15 @@
+<br><br><br>
+<div style="margin-right: 420px;">
+<div class="jumbotron">
 
+<h4>Price Estimator</h4>
+<small>Use This tool to Estimate the Cost of your Adventure Before Checkout</small><br><br>
+<%= simple_form_for @calculator do |f| %>
+<%= f.input :six_hundred, label: "Number of People @ (600 ft.)- $65.00 per person", collection: 0..15, :input_html => {:style => 'width: 25%'}%>
+<%= f.input :eight_hundred, label: "Number of People @ (800 ft.)- $75.00 per person", collection: 0..15, :input_html => {:style => 'width: 25%'}%>
+<%= f.input :photo_package, label: "Number of Photo Packages- $30 each",collection: 0..3, :input_html => {:style => 'width: 25%'}%>
+<%= f.input :discount_code, placeholder: "Only one code per reservation", :input_html => {:style => 'width: 55%'} %>
+<%= f.button :submit, "Estimate Total" %>
+<% end %>
+</div>
+</div>
