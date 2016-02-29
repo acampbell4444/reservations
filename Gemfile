@@ -51,3 +51,7 @@ gem 'figaro', '1.0'
 gem 'simple_form'
 
 gem 'friendly_id', '~> 5.1.0'
+
+gem 'client_side_validations'
+
+gem 'client_side_validations-simple_form'

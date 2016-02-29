@@ -2,7 +2,6 @@
 <div style="float:left">
 <div class="jumbotron">
 <h2><%= @playday.date %> <br><small><small> Available seats</small></small></h2>
-<strong>7:00am:</strong>&nbsp&nbsp <%= @playday.seven_am %> seats available <br><br>
 <strong>8:00am:</strong>&nbsp&nbsp <%= @playday.eight_am %> seats available  <br><br>
 <strong>9:00am:</strong>&nbsp&nbsp <%= @playday.nine_am %> seats available  <br><br>
 <strong>10:00am:</strong> <%= @playday.ten_am %> seats available  <br><br>
@@ -15,26 +14,23 @@
 <strong>5:00pm:</strong>&nbsp&nbsp <%= @playday.five_pm %> seats available  <br><br>
 <strong>6:00pm:</strong>&nbsp&nbsp <%= @playday.six_pm %> seats available  <br><br>
 <strong>7:00pm:</strong>&nbsp&nbsp <%= @playday.seven_pm %> seats available  <br><br>
-<strong>8:00pm:</strong>&nbsp&nbsp <%= @playday.eight_pm %> seats available  <br><br>
 </div>
 </div>
 
 <% if current_user.present? %>
   <div style= "float:right; padding-right: 150px">
   <div class="jumbotron">
-    <h2>Make Your Reservation</h2>
+    <h2>Make Your Reservation</h2><br>
 
-    <%= simple_form_for [@playday, @reservation] do |f| %>
+    <%= simple_form_for @reservation, validate: true do |f| %>
+    
 
-    <%= @playday.date %>
-    <%= @playday.slug %>
-
-    <%= f.input :six_hundred %>
-    <%= f.input :eight_hundred %>
-    <%= f.input :photo, :input_html => {:style => 'width: 25%'}%>
-    <%= f.input :discount, :input_html => {:style => 'width: 25%'} %>
-    <%= f.input :time %>
-    <%= f.input :date %>
+    <strong>Number of Passengers @ 600' </strong><%= f.input_field :six_hundred, default: 0, collection: 0..15, :input_html => {:style => 'width: 20%'} %><br><br><br>
+    <strong>Number of Passengers @ 800' </strong><%= f.input_field :eight_hundred, default: 0, collection: 0..15, :input_html => {:style => 'width: 20%'} %><br><br><br>
+    <strong>Number of Photo Packages </strong><%= f.input_field :photo, collection: 0..3, default: 0, :input_html => {:style => 'width: 20%'}%><br><br><br>
+    <strong>Time  </strong><%= f.input_field :time,  validate: { presence: true}, :input_html => {:style => 'width: 20%'}, collection: ["8 am","9 am","10 am", "11 am", "12 pm", "1 pm", "2 pm","3 pm", "4 pm", "5 pm", "6 pm", "7 pm"] %><br><br><br>
+    <strong>Date  </strong><%= f.input_field :date, :input_html => {:style => 'width: 20%'}%><br><br><br>
+    <strong>Discount Code  </strong><%= f.input_field :discount, :input_html => {:style => 'width: 50%'} %><br><br><br>
     <%= f.button :submit %>
     <% end %>
   </div>

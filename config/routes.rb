@@ -8,10 +8,10 @@ Rails.application.routes.draw do
      get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
-  resources :playdays do
-    resources :reservations do
-    end
-  end
+  resources :playdays
+
+  resources :reservations
+
 
 
 

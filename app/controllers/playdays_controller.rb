@@ -3,11 +3,7 @@ class PlaydaysController < ApplicationController
     @reservation = Reservation.new
     @calculator = Calculator.new
     @playdays = Playday.all
-      if params[:search]
-        @playdays = Playday.search(params[:search])
-     else
-       @playdays = Playday.where("date > ?", Date.today.strftime("%m-%d-%Y").to_s)
-     end
+    @playdays = Playday.where("date > ?", Date.today.strftime("%m-%d-%Y").to_s)
   end
 
   def show

@@ -1,3 +1,5 @@
+//= require rails.validations
+//= require rails.validations.simple_form
 $(function() {
   $("#playday_date").datepicker({ dateFormat: 'mm-dd-yy' });
 });
@@ -5,16 +7,6 @@ $(function() {
 $(function() {
   $("#reservation_date").datepicker({ dateFormat: 'mm-dd-yy' });
 });
-
-//$(function() {
-//  $("#reservation_six_hundred").change(function(){
-//    var six_hundred = $(this).val();
-//    jQuery.getJSON(window.location.href + "/price"), {six_hundred: six_hundred}, function(data){
-//      $("price").text("$" + data.total_price);
-//    });
-//    });
-
-
 
 
 

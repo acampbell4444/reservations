@@ -1,11 +1,11 @@
 <h1>Reservations#new</h1>
 <p>Find me in app/views/reservations/new.html.erb</p>
-<%= @playday.seven_am %>
+
 
 
 
 <%= simple_form_for [@playday, @reservation] do |f| %>
-  <%= f.input :six_hundred %>
+  <%= f.input :six_hundred, default: 0%>
   <%= f.input :eight_hundred %>
   <%= f.input :date%>
   <%= f.input :time %>
