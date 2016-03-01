@@ -1,14 +1,3 @@
-//= require rails.validations
-//= require rails.validations.simple_form
-$(function() {
-  $("#playday_date").datepicker({ dateFormat: 'mm-dd-yy' });
-});
-
-$(function() {
-  $("#reservation_date").datepicker({ dateFormat: 'mm-dd-yy' });
-});
-
-
 
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
@@ -22,9 +11,16 @@ $(function() {
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap
-
 //= require_tree .
+
+$(function() {
+  $("#playday_date").datepicker({ dateFormat: 'mm-dd-yy' });
+});
+
+$(function() {
+  $("#reservation_date").datepicker({ dateFormat: 'mm-dd-yy' });
+});

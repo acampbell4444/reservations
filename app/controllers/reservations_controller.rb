@@ -34,8 +34,8 @@ class ReservationsController < ApplicationController
       }
       @playday = ""
       @playday = Playday.find_by date: @reservation.date
-      if @playday.nil?
-        return flash.now[:alert] = "Must choose a Valid Date, at least one Day from Today"
+      if @playday.nil? ||  (@reservation.date < ((Date.today + 1).strftime("%m-%d-%Y").to_s))
+        return flash.now[:alert] = "Must choose a Valid Date, at least one Day from Today."
       end
       date = @reservation.date
       six = @reservation.six_hundred || 0
@@ -76,12 +76,25 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find(params[:id])
   end
 
-  def delete
+  def destroy
+    raise "burrito"
+    @reservation = Reservation.find(params[:id])
+
+    if @reservation.delete
+      raise "turkey"
+      flash[:notice] = "\"#{@reservation.id}\" for #{@reservation.date} was deleted successfully."
+      redirect_to root_path
+    else
+      raise "chicken"
+      flash.now[:alert] = "There was an error deleting the reservation."
+      redirect_to root_path #change this
+    end
   end
-end
 
 private
 
 def reservation_params
   params.require(:reservation).permit(:six_hundred, :eight_hundred, :date, :time, :photo, :discount, :playday_id )
+end
+
 end

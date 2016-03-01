@@ -1,16 +1,53 @@
+<br><br>
 
-<br><br><br>
-<div style="float:left">
-<div class="jumbotron">
+<h2> Welcome to <a href="http://parasailcatalina.com/" target="_blank">Parasail Catalina's</a> reservation System
+<span style="float:right">
+<div class="btn btn-success btn-xs">
+      <span class="glyphicon glyphicon-plus">
+        <%= link_to "Make a Reservation", new_reservation_path,style: " font-weight:bold; color:white" %>
+      </span>
+    </div>
+</span>
+</h2><br>
 
-<h2>Price Estimator</h2>
-<small>Use This tool to Estimate the Cost of your Adventure Before Checkout</small><br><br>
-<%= simple_form_for @calculator do |f| %>
-<%= f.input :six_hundred, label: "Number of People @ (600 ft.)- $65.00 per person", collection: 0..15, default: 0, :input_html => {:style => 'width: 25%'}%>
-<%= f.input :eight_hundred, label: "Number of People @ (800 ft.)- $75.00 per person", collection: 0..15, default: 0, :input_html => {:style => 'width: 25%'}%>
-<%= f.input :photo_package, label: "Number of Photo Packages- $30 each",collection: 0..3, default: 0, :input_html => {:style => 'width: 25%'}%>
-<%= f.input :discount_code, placeholder: "One code per reservation", :input_html => {:style => 'width: 55%'} %>
-<%= f.button :submit, "Estimate Total" %>
-<% end %>
-</div>
-</div>
+<p style="">Type in some stuff about reservation policies, discounts, rules,logging in, to see a full list of reservation polices click on the FAQ link in the navigation bar</p>
+<ul ><strong>List</strong>
+  <li>list item</li>
+  <li>list item</li>
+</ul><br><br>
+
+  <span style="float:left">
+    <div class="jumbotron">
+      <small><h3>How Much Will it Cost?</h3><small>Use This tool to Estimate the Cost of your Adventure Before Checkout</small><br><br>
+      <%= simple_form_for @calculator do |f| %>
+         Number of People @ (600 ft.)- $65.00 per person <%= f.input_field :six_hundred, collection: 0..15, default: 0, :input_html => {:style => 'width: 25%'}%><br><br>
+         Number of People @ (800 ft.)- $75.00 per person <%= f.input_field :eight_hundred, collection: 0..15, default: 0, :input_html => {:style => 'width: 25%'}%><br><br>
+         Number of Photo Packages- $30 each <%= f.input_field :photo_package,collection: 0..5, default: 0, :input_html => {:style => 'width: 25%'}%><br><br>
+         Discount Code <%= f.input_field :discount_code, placeholder: "Only 1 code allowed", :input_html => {:style => 'width: 100%'} %><br><br>
+        <%= f.button :submit, "Estimate Total" %>
+        </small>
+      <% end %>
+    </div>
+  </span>
+  <span style="float:right; padding-right:10px">
+      <h2 style="text-align:center; color:orange">Upcoming Dates</h2>
+      <p style="text-align:center;font-size: 12px">To check openings for an upcoming date, click on that date below. <br>
+      If your desired date is not listed, use the Date Selector at the top of the screen.</p>
+      <span style="float:left; padding-left: 25px">
+        <% @playdays.each do |playday| %>
+          <% if (playday.date > Date.today.strftime("%m-%d-%Y").to_s) && (playday.date < (Date.today + 8).strftime("%m-%d-%Y").to_s) %>
+            <% date = (Date.strptime(playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %>
+            <%= link_to "#{date}", playday_path(playday) %><br>
+          <% end %>
+        <% end %>
+      </span>
+
+      <span style="float:right;padding-right:25px">
+        <% @playdays.each do |playday| %>
+          <% if (playday.date > (Date.today + 7).strftime("%m-%d-%Y").to_s) && (playday.date < (Date.today + 15).strftime("%m-%d-%Y").to_s) %>
+            <% date = (Date. strptime(playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %>
+            <%= link_to "#{date}", playday_path(playday) %><br>
+          <% end %>
+        <% end %>
+      </span>
+  </span>

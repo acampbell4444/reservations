@@ -1,7 +1,9 @@
+
+
 <br>
 <div style="float:left">
 <div class="jumbotron">
-<h2><%= @playday.date %> <br><small><small> Available seats</small></small></h2>
+<h3><%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %> <br><small> Available seats</small></h3><br>
 <strong>8:00am:</strong>&nbsp&nbsp <%= @playday.eight_am %> seats available  <br><br>
 <strong>9:00am:</strong>&nbsp&nbsp <%= @playday.nine_am %> seats available  <br><br>
 <strong>10:00am:</strong> <%= @playday.ten_am %> seats available  <br><br>
@@ -20,10 +22,10 @@
 <% if current_user.present? %>
   <div style= "float:right; padding-right: 150px">
   <div class="jumbotron">
-    <h2>Make Your Reservation</h2><br>
+    <h3>Make Your Reservation</h3><br>
 
     <%= simple_form_for @reservation, validate: true do |f| %>
-    
+
 
     <strong>Number of Passengers @ 600' </strong><%= f.input_field :six_hundred, default: 0, collection: 0..15, :input_html => {:style => 'width: 20%'} %><br><br><br>
     <strong>Number of Passengers @ 800' </strong><%= f.input_field :eight_hundred, default: 0, collection: 0..15, :input_html => {:style => 'width: 20%'} %><br><br><br>
