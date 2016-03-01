@@ -24,7 +24,7 @@
         <li style="font-weight:bold"><%= link_to "Sign In", new_user_session_path, :class => 'navbar-link'  %></li>
         <% end%>
       <div class="row">
-      <li style="padding-left:570px; padding-bottom: 20px">  <%= simple_form_for :playday, :defaults => {:required => false}, url: :playdays, wrapper_html: {class: "form-inline"}, 'data-no-turbolink' => true do |f| %>
+      <li style="">  <%= simple_form_for :playday, :defaults => {:required => false}, url: :playdays, wrapper_html: {class: "form-inline"}, 'data-no-turbolink' => true do |f| %>
           <%= f.input :date, placeholder: "Select Date", label: false, :input_html => {:style => 'color: green; float: left; width: 32%'} %>
           <%= f.button :submit, 'Check Availability and Reserve!', :class => "btn-primary", :input_html => {:style => 'float:right'} %>
         <% end %></li>

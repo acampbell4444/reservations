@@ -1,4 +1,3 @@
-<br><br>
 
 <h2> Welcome to <a href="http://parasailcatalina.com/" target="_blank">Parasail Catalina's</a> reservation System
 <span style="float:right">
@@ -29,25 +28,17 @@
       <% end %>
     </div>
   </span>
+
   <span style="float:right; padding-right:10px">
+    <div class="jumbotron">
       <h2 style="text-align:center; color:orange">Upcoming Dates</h2>
       <p style="text-align:center;font-size: 12px">To check openings for an upcoming date, click on that date below. <br>
       If your desired date is not listed, use the Date Selector at the top of the screen.</p>
-      <span style="float:left; padding-left: 25px">
+
         <% @playdays.each do |playday| %>
-          <% if (playday.date > Date.today.strftime("%m-%d-%Y").to_s) && (playday.date < (Date.today + 8).strftime("%m-%d-%Y").to_s) %>
+          <% if (playday.date > Date.today.strftime("%m-%d-%Y").to_s) && (playday.date < (Date.today + 15).strftime("%m-%d-%Y").to_s) %>
             <% date = (Date.strptime(playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %>
             <%= link_to "#{date}", playday_path(playday) %><br>
           <% end %>
         <% end %>
-      </span>
-
-      <span style="float:right;padding-right:25px">
-        <% @playdays.each do |playday| %>
-          <% if (playday.date > (Date.today + 7).strftime("%m-%d-%Y").to_s) && (playday.date < (Date.today + 15).strftime("%m-%d-%Y").to_s) %>
-            <% date = (Date. strptime(playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %>
-            <%= link_to "#{date}", playday_path(playday) %><br>
-          <% end %>
-        <% end %>
-      </span>
-  </span>
+    </div>

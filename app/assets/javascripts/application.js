@@ -21,6 +21,7 @@ $(function() {
   $("#playday_date").datepicker({ dateFormat: 'mm-dd-yy' });
 });
 
+
 $(function() {
   $("#reservation_date").datepicker({ dateFormat: 'mm-dd-yy' });
 });
