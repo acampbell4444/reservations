@@ -1,33 +1,16 @@
-<h1>Reservations#new</h1>
-<p>Find me in app/views/reservations/new.html.erb</p>
+<div style= "">
+<div class="jumbotron">
+  <h3>Make Your Reservation</h3><br>
 
+  <%= simple_form_for @reservation, validate: true do |f| %>
 
-
-
-<%= simple_form_for [@playday, @reservation] do |f| %>
-  <%= f.input :six_hundred, default: 0%>
-  <%= f.input :eight_hundred %>
-  <%= f.input :date%>
-  <%= f.input :time %>
-  <%= f.button :submit, "Go To Checkout" %>
-<% end %>
-
-
-<% if false %>
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
-
-
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
-    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-    <%= f.input :password_confirmation, required: true %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
-<% end %>
+  <strong>Number of Passengers @ 600' </strong><%= f.input_field :six_hundred, default: 0, collection: 0..15, :input_html => {:style => 'width: 20%'} %><br><br><br>
+  <strong>Number of Passengers @ 800' </strong><%= f.input_field :eight_hundred, default: 0, collection: 0..15, :input_html => {:style => 'width: 20%'} %><br><br><br>
+  <strong>Number of Photo Packages </strong><%= f.input_field :photo, collection: 0..3, default: 0, :input_html => {:style => 'width: 20%'}%><br><br><br>
+  <strong>Time  </strong><%= f.input_field :time,  validate: { presence: true}, :input_html => {:style => 'width: 20%'}, collection: ["8 am","9 am","10 am", "11 am", "12 pm", "1 pm", "2 pm","3 pm", "4 pm", "5 pm", "6 pm", "7 pm"] %><br><br><br>
+  <strong>Date  </strong><%= f.input_field :date, :input_html => {:style => 'width: 20%'}%><br><br><br>
+  <strong>Discount Code  </strong><%= f.input_field :discount, :input_html => {:style => 'width: 50%'} %><br><br><br>
+  <%= f.button :submit %>
+  <% end %>
+</div>
+</div>

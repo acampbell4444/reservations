@@ -35,7 +35,7 @@ class ReservationsController < ApplicationController
       @playday = ""
       @playday = Playday.find_by date: @reservation.date
       if @playday.nil? ||  (@reservation.date < ((Date.today + 1).strftime("%m-%d-%Y").to_s))
-        return flash.now[:alert] = "Must choose a Valid Date, at least one Day from Today."
+        return flash.now[:alert] = "Must choose a Valid Date, at least one day from today. Use the date picker above to search availabilities by date."
       end
       date = @reservation.date
       six = @reservation.six_hundred || 0

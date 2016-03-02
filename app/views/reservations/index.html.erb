@@ -1,1 +1,6 @@
 <h1>Reservation Index</h1>
+
+<% @reservations.each do |reservation| %>
+<%= link_to reservation.date, reservation %><br>
+<%= reservation.email %>
+<% end %>

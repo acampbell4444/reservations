@@ -46,4 +46,36 @@ class Reservation < ActiveRecord::Base
     attribute = times[self.time]
     @playday.update_attribute(attribute, @playday.send(attribute) - total_reservations)
   end
+
+  def total_estimate
+    six + eight + photos #-discount
+  end
+
+  def six
+    if self.six_hundred.nil?
+      0
+    else
+      65*(self.six_hundred)
+    end
+  end
+
+  def eight
+    if self.eight_hundred.nil?
+      0
+    else
+      75*(self.eight_hundred)
+    end
+  end
+
+  def photos
+    if self.photo.nil?
+      0
+    else
+      30*(self.photo)
+    end
+  end
+
+  def discount
+#enter discount logic here
+  end
 end
