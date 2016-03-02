@@ -5,5 +5,7 @@ class Playday < ActiveRecord::Base
   extend FriendlyId
     friendly_id :date, use: :slugged
 
+    default_scope { order('date ASC') }
+
 
 end

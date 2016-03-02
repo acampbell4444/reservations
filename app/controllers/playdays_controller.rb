@@ -7,6 +7,7 @@ class PlaydaysController < ApplicationController
 
     @playdays = Playday.all
     @playdays = Playday.where("date > ?", formatted_now)
+    
 
   end
 
