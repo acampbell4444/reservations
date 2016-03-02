@@ -26,7 +26,6 @@
 
     <%= simple_form_for @reservation, validate: true do |f| %>
 
-
     <strong>Number of Passengers @ 600' </strong><%= f.input_field :six_hundred, default: 0, collection: 0..15, :input_html => {:style => 'width: 20%'} %><br><br><br>
     <strong>Number of Passengers @ 800' </strong><%= f.input_field :eight_hundred, default: 0, collection: 0..15, :input_html => {:style => 'width: 20%'} %><br><br><br>
     <strong>Number of Photo Packages </strong><%= f.input_field :photo, collection: 0..3, default: 0, :input_html => {:style => 'width: 20%'}%><br><br><br>
