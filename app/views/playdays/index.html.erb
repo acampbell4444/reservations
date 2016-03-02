@@ -39,7 +39,11 @@ formatted_now: <%= formatted_now %><br>
 <% two_weeks = (now + 14.days) %><br>
 two_weeks : <%= two_weeks %><br><br>
 <% formatted_two_weeks = two_weeks.strftime("%m-%d-%Y").to_s %><br>
+<% @playdays.each do |playday| %>
 
+
+<%= link_to playday.date, playday %><br>
+  <% end %>
 
 
 
