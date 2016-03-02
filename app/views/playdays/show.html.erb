@@ -1,9 +1,8 @@
 
-
-<br>
+Online reservations must be made by no later than 8pm on the day before the reservation day. To reserve by phone call 310-510-1777<br><br>
 <div style="float:left">
 <div class="jumbotron">
-<h3><%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %> <br><small> Available seats</small></h3><br>
+<h3 style="color:blue">Available Seats for<br> <%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %></h3><br>
 <strong>8:00am:</strong>&nbsp&nbsp <%= @playday.eight_am %> seats available  <br><br>
 <strong>9:00am:</strong>&nbsp&nbsp <%= @playday.nine_am %> seats available  <br><br>
 <strong>10:00am:</strong> <%= @playday.ten_am %> seats available  <br><br>
@@ -18,24 +17,17 @@
 <strong>7:00pm:</strong>&nbsp&nbsp <%= @playday.seven_pm %> seats available  <br><br>
 </div>
 </div>
-
-<% if current_user.present? %>
-  <div style= "float:right;">
-  <div class="jumbotron">
-    <h3>Make Your Reservation</h3><br>
-
-    <%= simple_form_for @reservation, validate: true do |f| %>
-
-    <strong>Number of Passengers @ 600' </strong><%= f.input_field :six_hundred, default: 0, collection: 0..15, :input_html => {:style => 'width: 20%'} %><br><br><br>
-    <strong>Number of Passengers @ 800' </strong><%= f.input_field :eight_hundred, default: 0, collection: 0..15, :input_html => {:style => 'width: 20%'} %><br><br><br>
-    <strong>Number of Photo Packages </strong><%= f.input_field :photo, collection: 0..3, default: 0, :input_html => {:style => 'width: 20%'}%><br><br><br>
-    <strong>Time  </strong><%= f.input_field :time,  validate: { presence: true}, :input_html => {:style => 'width: 20%'}, collection: ["8 am","9 am","10 am", "11 am", "12 pm", "1 pm", "2 pm","3 pm", "4 pm", "5 pm", "6 pm", "7 pm"] %><br><br><br>
-    <strong>Date  </strong><%= f.input_field :date, :input_html => {:style => 'width: 20%'}%><br><br><br>
-    <strong>Discount Code  </strong><%= f.input_field :discount, :input_html => {:style => 'width: 50%'} %><br><br><br>
-    <%= f.button :submit %>
-    <% end %>
-  </div>
-  </div>
-<% else %>
-Put Some stuff about logging in here
-<% end %>
+<div style=float:right>
+<div class="jumbotron">
+  <h3 style="color:green">Reservation for <%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %> </h3><br>
+  <%= simple_form_for @reservation, validate: true do |reservation| %>
+  <%= reservation.input :date, :as => :hidden, input_html: { value: @playday.date } %>
+  <%= reservation.input :six_hundred, label: "Number of Passengers @ 600ft- $65 each",  collection: 0..15 %>
+  <%= reservation.input :eight_hundred, label: "Number of Passengers @ 800ft- $75 each",  collection: 0..15%>
+  <%= reservation.input :time, collection: ["8 am","9 am","10 am", "11 am", "12 pm", "1 pm", "2 pm","3 pm", "4 pm", "5 pm", "6 pm", "7 pm"] %>
+  <%= reservation.input :photo, label: "Number Photo Packages- $30 each",  collection: 0..5  %>
+  <%= reservation.input :discount, placeholder: "Only one code allowed"%>
+  <%= reservation.button :submit %>
+  <% end %>
+</div>
+</div>

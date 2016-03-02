@@ -15,7 +15,7 @@
     <ul class="nav nav-tabs">
       <li><%= link_to "Home", playdays_path %></li>
       <li><%= link_to "MyReservations", reservations_path %></li>
-      <li><%= link_to "FAQ" %></li>
+      <li><%= link_to "Policies" %></li>
       <% if user_signed_in? %>
         <li> <%= link_to "#{current_user.email}", edit_user_registration_path, style: "color:orange" %></li>
          <li><%= link_to "SignOut", destroy_user_session_path, method: :delete, class: 'navbar-link'  %></li>
@@ -27,12 +27,12 @@
 
 
       </div>
-    </ul>
-
+    </ul><br>
+    <strong>To Make a Reservation, First Select a Date to View Availabilities</strong>
     <%= simple_form_for :playday, :defaults => {:required => false}, url: :playdays, wrapper_html: {class: "form-inline"}, 'data-no-turbolink' => true do |f| %>
         <%= f.input :date, placeholder: "Pick Availabilities by Date", label: false, :input_html => {:style => 'color: green; float: left; width: 90%'} %>
         <%= f.button :submit, 'Click to View Availabilities', :class => "btn-primary", :input_html => {:style => 'float:right'} %>
-      <% end %>
+      <% end %><br>
 
 
     <% if flash[:notice] %>

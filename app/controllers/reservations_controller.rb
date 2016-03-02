@@ -14,6 +14,7 @@ class ReservationsController < ApplicationController
       session[:list] = params
       redirect_to new_user_registration_path
     else
+      @playday = Playday.current_scope
       @reservation = Reservation.new(reservation_params)
       @reservation.user = current_user
 
@@ -32,18 +33,22 @@ class ReservationsController < ApplicationController
         "7 pm" => "seven_pm",
         "8 pm" => "eight_pm",
       }
-      @playday = ""
       @playday = Playday.find_by date: @reservation.date
-      if @playday.nil? ||  (@reservation.date < ((Date.today + 1).strftime("%m-%d-%Y").to_s))
-        return flash.now[:alert] = "Must choose a Valid Date, at least one day from today. Use the date picker above to search availabilities by date."
+      now_plus_4 = Time.at(Time.now.utc + Time.zone_offset('PST')) + 4.hours
+      formatted_plus_4 = (now_plus_4.strftime("%m-%d-%Y").to_s)
+      formatted_plus_4
+      if formatted_plus_4 >= @reservation.date #&& current_user.standard?
+        flash[:alert] = "Online reservations must be made by no later than 8pm on the day before the reservation. To reserve by phone call 310-510-1777."
+        return redirect_to :back
       end
-      date = @reservation.date
+      @reservation.date = @playday.date
       six = @reservation.six_hundred || 0
       eight = @reservation.eight_hundred || 0
       total_reservations = six + eight
       attribute = times[@reservation.time]
       if total_reservations == 0
-        return flash.now[:alert] = "Must Choose at least One Passenger"
+        flash[:alert] = "Must Choose at least One Passenger."
+        return redirect_to :back
     end
 
       if attribute.nil?
@@ -51,6 +56,9 @@ class ReservationsController < ApplicationController
       end
 
       if (@playday.send(attribute) - total_reservations) < 0
+        flash[:alert] = "Too many Seats Selected. Only #{@playday.send(attribute)} spots available for #{@reservation.time}."
+        return redirect_to :back
+
         return flash.now[:alert] = "Too many Seats Selected. Only #{@playday.send(attribute)} spots available for #{@reservation.time}."
       end
 

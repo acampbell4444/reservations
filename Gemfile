@@ -42,8 +42,6 @@ gem 'factory_girl_rails', '~> 4.0'
 
 gem 'coffee-script-source', '1.8.0'
 
-
-
 gem "faker", "~> 1.6.1"
 
 gem 'stripe'
@@ -53,5 +51,9 @@ gem 'redcarpet', '~> 3.0.0'
 gem 'figaro', '1.0'
 
 gem 'simple_form'
+
+gem 'client_side_validations'
+
+gem 'client_side_validations-simple_form'
 
 gem 'friendly_id', '~> 5.1.0'

@@ -15,13 +15,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require rails.validations
+//= require rails.validations.simple_form
 //= require_tree .
 
 $(function() {
-  $("#playday_date").datepicker({ dateFormat: 'mm-dd-yy' });
+  $("#playday_date").datepicker({ minDate: 0 , dateFormat: 'mm-dd-yy' });
 });
 
-
-$(function() {
+var $j = jQuery.noConflict()
+$j(function() {
   $("#reservation_date").datepicker({ dateFormat: 'mm-dd-yy' });
 });

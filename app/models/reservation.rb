@@ -11,6 +11,7 @@ class Reservation < ActiveRecord::Base
   validates :user, presence: true
 
   after_create :update_playday_slots
+  default_scope { order('date ASC') }
 
 
 
