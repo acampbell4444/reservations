@@ -30,8 +30,8 @@
     </ul>
 
     <%= simple_form_for :playday, :defaults => {:required => false}, url: :playdays, wrapper_html: {class: "form-inline"}, 'data-no-turbolink' => true do |f| %>
-        <%= f.input :date, placeholder: "Select Date", label: false, :input_html => {:style => 'color: green; float: left; width: 32%'} %>
-        <%= f.button :submit, 'Check Availability and Reserve!', :class => "btn-primary", :input_html => {:style => 'float:right'} %>
+        <%= f.input :date, placeholder: "Pick Availabilities by Date", label: false, :input_html => {:style => 'color: green; float: left; width: 70%'} %>
+        <%= f.button :submit, 'Click to View Availabilities', :class => "btn-primary", :input_html => {:style => 'float:right'} %>
       <% end %>
 
 

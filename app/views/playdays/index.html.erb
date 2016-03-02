@@ -1,5 +1,5 @@
 
-<h4> Welcome to <a href="http://parasailcatalina.com/" target="_blank">Parasail Catalina's</a> reservation System
+<h4> Welcome to <a href="http://parasailcatalina.com/" target="_blank">Parasail Catalina's</a> reservation System<br><br>
   <div class="btn btn-success btn-xs">
     <span class="glyphicon glyphicon-plus">
       <%= link_to "Make a Reservation", new_reservation_path,style: " font-weight:bold; color:white" %>
@@ -8,10 +8,7 @@
 </h4><br>
 
 <p style="">Type in some stuff about reservation policies, discounts, rules,logging in, to see a full list of reservation polices click on the FAQ link in the navigation bar</p>
-<ul ><strong>List</strong>
-  <li>list item</li>
-  <li>list item</li>
-</ul><br><br>
+
 
   <span style="float:left">
     <div class="jumbotron">
@@ -29,8 +26,8 @@
 
   <span style="float:right; padding-right:10px">
     <div class="jumbotron">
-      <h2 style="text-align:center; color:orange">Upcoming Dates</h2>
-      <p style="text-align:center;font-size: 12px">To check openings for an upcoming date, click on that date below. <br>
+      <h3 style="color:orange">Upcoming Dates</h3>
+      <p style="font-size: 11px">To check openings for an upcoming date, click on that date below.
       If your desired date is not listed, use the Date Selector at the top of the screen.</p>
 
         <% @playdays.each do |playday| %>
