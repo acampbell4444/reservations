@@ -38,5 +38,6 @@ now_day = <%= now.strftime("%m-%d-%Y") %>
 formatted_now: <%= formatted_now %><br>
 
         <% @playdays.each do |playday| %>
+        <%= link_to playday.date, playday %><br>
         <% end %>
     </div>

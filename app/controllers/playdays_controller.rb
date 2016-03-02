@@ -2,8 +2,12 @@ class PlaydaysController < ApplicationController
   def index
     @reservation = Reservation.new
     @calculator = Calculator.new
+    now =  Time.at(Time.now.utc + Time.zone_offset('PST'))
+    formatted_now = (now.strftime("%m-%d-%Y").to_s)
+
     @playdays = Playday.all
-    @playdays = Playday.where("date > ?", Date.today.strftime("%m-%d-%Y").to_s)
+    @playdays = Playday.where("date > ?", formatted_now)
+
   end
 
   def show
