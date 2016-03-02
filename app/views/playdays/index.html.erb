@@ -32,21 +32,11 @@
 
 <% (now =  Time.at(Time.now.utc + Time.zone_offset('PST')) %><br>
 now = <%= now %><br>
+tomorrow = <%= now + 1.days %>
+now_day = <%= now.strftime("%m-%d-%Y") %>
 <%formatted_now = now.strftime("%m-%d-%Y").to_s) %><br>
 formatted_now: <%= formatted_now %><br>
+
         <% @playdays.each do |playday| %>
-          <% if (playday.date > formatted_now) && (playday.date < (Time.zone.today + 15).strftime("%m-%d-%Y").to_s) %>
-            <% date = (Date.strptime(playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %>
-            <%= link_to "#{date}", playday_path(playday) %><br>
-          <% end %>
         <% end %>
     </div>
-
-    <%= Time.zone.today %>
-
-    <% @playdays.each do |playday| %>
-      <% if (playday.date > Time.zone.today.strftime("%m-%d-%Y").to_s) && (playday.date < (Time.zone.today + 15).strftime("%m-%d-%Y").to_s) %>
-        <% date = (Date.strptime(playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %>
-        <%= link_to "#{date}", playday_path(playday) %><br>
-      <% end %>
-    <% end %>
