@@ -31,6 +31,7 @@
       If your desired date is not listed, use the Date Selector at the top of the screen.</p>
 
 <% now =  Time.at(Time.now.utc + Time.zone_offset('PST')) %>
+now = <%= now %>
         <% @playdays.each do |playday| %>
           <% if (playday.date > now.strftime("%m-%d-%Y").to_s) && (playday.date < (Time.zone.today + 15).strftime("%m-%d-%Y").to_s) %>
             <% date = (Date.strptime(playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %>
