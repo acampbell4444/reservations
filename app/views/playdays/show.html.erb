@@ -1,5 +1,40 @@
 
-Online reservations must be made by no later than 8pm on the day before the reservation day. To reserve by phone call 310-510-1777<br><br>
+Online reservations must be made by no later than 8pm on the day before the activity day. To reserve by phone call 310-510-1777<br><br>
+<% unless current_user.present? %>
+
+    <div class="jumbotron">
+      <div class="row">
+        <div style="float:left;padding-left:25px">
+          <h3><%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %></h3>
+          <strong>
+          <div style="padding-top: 10px; color: blue">8:00 am &nbsp&nbsp&nbsp <%= @playday.eight_am || nil%> seats available</div>
+          <div style="padding-top: 9px; color: blue"> 9:00 am &nbsp&nbsp&nbsp <%= @playday.nine_am || nil%> seats available </div>
+          <div style="padding-top: 8px; color: blue"> 10:00 am &nbsp <%= @playday.ten_am || nil %> seats available</div>
+          <div style="padding-top: 8px; color: blue"> 11:00 am &nbsp <%= @playday.eleven_am || nil%> seats available</div>
+          <div style="padding-top: 8px; color: blue"> 12:00 pm &nbsp <%= @playday.twelve_pm || nil%> seats available</div>
+          <div style="padding-top: 8px; color: blue"> 1:00 pm &nbsp&nbsp&nbsp <%= @playday.one_pm || nil%> seats available</div>
+          <div style="padding-top: 8px; color: blue"> 2:00 pm &nbsp&nbsp&nbsp <%= @playday.two_pm || nil%> seats available</div>
+          <div style="padding-top: 8px; color: blue"> 3:00 pm &nbsp&nbsp&nbsp <%= @playday.three_pm || nil%> seats available</div>
+          <div style="padding-top: 8px; color: blue"> 4:00 pm &nbsp&nbsp&nbsp <%= @playday.four_pm || nil%> seats available</div>
+          <div style="padding-top: 8px; color: blue"> 5:00 pm &nbsp&nbsp&nbsp <%= @playday.five_pm || nil%> seats available</div>
+          <div style="padding-top: 8px; color: blue"> 6:00 pm &nbsp&nbsp&nbsp <%= @playday.six_pm || nil%> seats available</div>
+          <div style="padding-top: 8px; color: blue"> 7:00 pm &nbsp&nbsp&nbsp <%= @playday.seven_pm || nil %> seats available</div><br>
+        </strong>
+        </div>
+
+          <div style="float:right; padding-top: 0px; padding-right:75px; text-align:center">
+            <h3>Make a Reservation</h3><br>
+            <h4>If you are a New User<br><br>
+            <%= link_to "Enter Your Email Address Here", new_user_registration_path, class: 'btn btn-success' %><br><br><br>
+            <br>
+             If you have a User Account</h4><br>  <%= link_to "Sign in Here", new_user_session_path, class: 'btn btn-primary' %><br><br>
+
+          </div>
+        </div>
+      </div>
+        <% end %>
+
+<% if current_user.present? %>
 <div style="float:left">
   <div class="jumbotron">
     <h4 style="color:black"><small>Reservation for</small><br> <%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %> </h4><br>
@@ -10,18 +45,18 @@ Online reservations must be made by no later than 8pm on the day before the rese
           <small><%= reservation.input_field :time, as: :radio_buttons, collection: ["8 am","9 am","10 am", "11 am", "12 pm", "1 pm", "2 pm","3 pm", "4 pm", "5 pm", "6 pm", "7 pm"] %></small>
         </div>
         <small>
-        <div style="padding-top: 10px; color: green"> &nbsp&nbsp <%= @playday.eight_am || nil%> seats available</div>
-        <div style="padding-top: 9px; color: green"> &nbsp&nbsp <%= @playday.nine_am || nil%> seats available </div>
-        <div style="padding-top: 8px; color: green"> &nbsp&nbsp <%= @playday.ten_am || nil %> seats available</div>
-        <div style="padding-top: 8px; color: green"> &nbsp&nbsp <%= @playday.eleven_am || nil%> seats available</div>
-        <div style="padding-top: 8px; color: green"> &nbsp&nbsp <%= @playday.twelve_pm || nil%> seats available</div>
-        <div style="padding-top: 8px; color: green"> &nbsp&nbsp <%= @playday.one_pm || nil%> seats available</div>
-        <div style="padding-top: 8px; color: green"> &nbsp&nbsp <%= @playday.two_pm || nil%> seats available</div>
-        <div style="padding-top: 8px; color: green"> &nbsp&nbsp <%= @playday.three_pm || nil%> seats available</div>
-        <div style="padding-top: 8px; color: green"> &nbsp&nbsp <%= @playday.four_pm || nil%> seats available</div>
-        <div style="padding-top: 8px; color: green"> &nbsp&nbsp <%= @playday.five_pm || nil%> seats available</div>
-        <div style="padding-top: 8px; color: green"> &nbsp&nbsp <%= @playday.six_pm || nil%> seats available</div>
-        <div style="padding-top: 8px; color: green"> &nbsp&nbsp <%= @playday.seven_pm || nil %> seats available</div><br>
+        <div style="padding-top: 10px; color: blue"> &nbsp&nbsp <%= @playday.eight_am || nil%> seats available</div>
+        <div style="padding-top: 9px; color: blue"> &nbsp&nbsp <%= @playday.nine_am || nil%> seats available </div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.ten_am || nil %> seats available</div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.eleven_am || nil%> seats available</div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.twelve_pm || nil%> seats available</div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.one_pm || nil%> seats available</div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.two_pm || nil%> seats available</div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.three_pm || nil%> seats available</div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.four_pm || nil%> seats available</div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.five_pm || nil%> seats available</div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.six_pm || nil%> seats available</div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.seven_pm || nil %> seats available</div><br>
           </small>
       </div>
       <%= reservation.input :date, :as => :hidden, input_html: { value: @playday.date } %>
@@ -41,6 +76,7 @@ Online reservations must be made by no later than 8pm on the day before the rese
 
 <div style="float:right">
   <div class="jumbotron">
-    <h1>Lots and lots and lots of tacos for sale! Do you want one?!<h1>
+    <h4>Still need to add input fields: first name, last name, etc-  to reservation form.<h4>
   </div>
 </div>
+<% end %>

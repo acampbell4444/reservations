@@ -38,7 +38,7 @@ class ReservationsController < ApplicationController
       formatted_plus_4 = (now_plus_4.strftime("%m-%d-%Y").to_s)
       formatted_plus_4
       if formatted_plus_4 >= @reservation.date #&& current_user.standard?
-        flash[:alert] = "Online reservations must be made by no later than 8pm on the day before the reservation. To reserve by phone call 310-510-1777."
+        flash[:alert] = "Online reservations must be made by no later than 8pm on the day before the activity. To reserve by phone call 310-510-1777."
         return redirect_to :back
       end
       @reservation.date = @playday.date
@@ -109,7 +109,7 @@ class ReservationsController < ApplicationController
       new_num =  "#{(@playday.send(attribute) + total_reservations)}"
       @playday.update_attribute(attribute.to_sym, new_num)
 
-      flash[:notice] = "#{@reservation.user.email}'s # #{@reservation.id} for #{@reservation.date} was deleted successfully."
+      flash[:notice] = "#{@reservation.user.email}'s reservation # #{@reservation.id} for #{@reservation.date} was deleted successfully."
       redirect_to root_path
     else
       flash.now[:alert] = "There was an error deleting the reservation."

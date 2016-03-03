@@ -1,6 +1,17 @@
-<h1>Reservation Index</h1>
+<h1>My Reservations</h1>
 
+<strong>This index view will be scoped based on User roles.<br>
+  Admin users will be able to see all reservations organized<br>
+   by date. Standard users will see only their own reservations.<br><br>
+   There will also be a search feature that searches<br>
+    by last name for easy updates and cancellations<br><br><br>
+  <strong>
+
+
+<h4>
 <% @reservations.each do |reservation| %>
-<%= link_to reservation.date, reservation %><br>
-<%= reservation.email %>
+<%= link_to reservation.date, reservation %>&nbsp&nbsp
+<%= reservation.user.email %><br>
 <% end %>
+
+</h4>

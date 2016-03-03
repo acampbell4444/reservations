@@ -27,11 +27,14 @@
 
 
       </div>
-    </ul><br>
-    <strong>To Make a Reservation, First Select a Date to View Availabilities</strong>
+    </ul>
     <%= simple_form_for :playday, :defaults => {:required => false}, url: :playdays, wrapper_html: {class: "form-inline"}, 'data-no-turbolink' => true do |f| %>
-        <%= f.input :date, placeholder: "Pick Availabilities by Date", label: false, :input_html => {:style => 'color: green; float: left; width: 90%'} %>
-        <%= f.button :submit, 'Click to View Availabilities', :class => "btn-primary", :input_html => {:style => 'float:right'} %>
+        <br>
+        <div class="row">
+        <div style="float:left; padding-left:20px"><span style="font-size:25px;color:blue; padding-right:5px"><span class="glyphicon glyphicon-calendar"></span></span></div>
+        <%= f.input :date, placeholder: "Pick Availabilities by Date", label: false, :input_html => {:style => 'color: green; float: left; width: 34%'} %>
+      </div>
+        <%= f.button :submit, 'Pick a Date Above, and Click Here to see Availabilities', :class => "btn-primary", :input_html => {:style => 'float:right'} %>
       <% end %><br>
 
 
