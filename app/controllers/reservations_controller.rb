@@ -50,18 +50,14 @@ class ReservationsController < ApplicationController
         flash[:alert] = "Must Choose at least One Passenger."
         return redirect_to :back
     end
-
-      if attribute.nil?
-          return flash.now[:alert] = "Must choose a Valid Time"
-      end
-
+    if attribute.nil?
+      flash[:alert] = "Must choose a Departure Time"
+      return redirect_to :back
+    end
       if (@playday.send(attribute) - total_reservations) < 0
         flash[:alert] = "Too many Seats Selected. Only #{@playday.send(attribute)} spots available for #{@reservation.time}."
         return redirect_to :back
-
-        return flash.now[:alert] = "Too many Seats Selected. Only #{@playday.send(attribute)} spots available for #{@reservation.time}."
       end
-
 
       if @reservation.save
         flash[:notice] = "Reservation was saved."
@@ -78,6 +74,7 @@ class ReservationsController < ApplicationController
   end
 
   def update
+
   end
 
   def show
@@ -85,17 +82,38 @@ class ReservationsController < ApplicationController
   end
 
   def destroy
-    raise "burrito"
     @reservation = Reservation.find(params[:id])
+    @playday = Playday.find_by_date(@reservation.date)
+    times = {
+      "8 am" => "eight_am",
+      "9 am" => "nine_am",
+      "10 am" => "ten_am",
+      "11 am" => "eleven_am",
+      "12 pm" => "twelve_pm",
+      "1 pm" => "one_pm",
+      "2 pm" => "two_pm",
+      "3 pm" => "three_pm",
+      "4 pm" => "four_pm",
+      "5 pm" => "five_pm",
+      "6 pm" => "six_pm",
+      "7 pm" => "seven_pm",
+      "8 pm" => "eight_pm",
+    }
+    six = @reservation.six_hundred || 0
+    eight = @reservation.eight_hundred || 0
+    total_reservations = six + eight
+    attribute = times[@reservation.time]
+
 
     if @reservation.delete
-      raise "turkey"
-      flash[:notice] = "\"#{@reservation.id}\" for #{@reservation.date} was deleted successfully."
+      new_num =  "#{(@playday.send(attribute) + total_reservations)}"
+      @playday.update_attribute(attribute.to_sym, new_num)
+
+      flash[:notice] = "#{@reservation.user.email}'s # #{@reservation.id} for #{@reservation.date} was deleted successfully."
       redirect_to root_path
     else
-      raise "chicken"
       flash.now[:alert] = "There was an error deleting the reservation."
-      redirect_to root_path #change this
+      redirect_to :back
     end
   end
 

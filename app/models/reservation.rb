@@ -14,13 +14,8 @@ class Reservation < ActiveRecord::Base
   default_scope { order('date ASC') }
 
 
-
   extend FriendlyId
     friendly_id :playday_id, use: :slugged
-
-
-
-
 
   def update_playday_slots
     times = {
@@ -76,7 +71,6 @@ class Reservation < ActiveRecord::Base
     end
   end
 
-  def discount
-#enter discount logic here
+  def discount_codes
   end
 end

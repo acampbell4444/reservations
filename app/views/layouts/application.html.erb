@@ -17,8 +17,8 @@
       <li><%= link_to "MyReservations", reservations_path %></li>
       <li><%= link_to "Policies" %></li>
       <% if user_signed_in? %>
-        <li> <%= link_to "#{current_user.email}", edit_user_registration_path, style: "color:orange" %></li>
-         <li><%= link_to "SignOut", destroy_user_session_path, method: :delete, class: 'navbar-link'  %></li>
+      <li><%= link_to "SignOut", destroy_user_session_path, method: :delete, class: 'navbar-link'  %></li>
+      <li> <%= link_to "#{current_user.email}", edit_user_registration_path, style: "color:orange" %></li>
       <% else %>
         <li style="font-weight:bold"><%= link_to "Sign Up", new_user_registration_path, :class => 'navbar-link'  %></li>
         <li style="font-weight:bold"><%= link_to "Sign In", new_user_session_path, :class => 'navbar-link'  %></li>
