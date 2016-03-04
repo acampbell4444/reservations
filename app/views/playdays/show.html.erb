@@ -40,8 +40,8 @@
 <% if current_user.present? %>
 <div style="float:left">
   <div class="jumbotron">
-    <h4 style="color:black"><small>Reservation for</small><br> <%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %> </h4><br>
-    <%= simple_form_for @reservation, validate: true do |reservation| %>
+    <h4 style="color:black"><h3>New Reservation</h3> <%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %> </h4><br>
+    <br><%= simple_form_for @reservation, validate: true do |reservation| %>
       <strong>Time<br></strong>
       <div class="row">
         <div style="float:left; padding-left:20px">

@@ -25,5 +25,5 @@ $(function() {
 
 var $j = jQuery.noConflict()
 $j(function() {
-  $("#reservation_date").datepicker({ dateFormat: 'mm-dd-yy' });
+  $("#reservation_date").datepicker({ minDate: 0 , dateFormat: 'mm-dd-yy' });
 });

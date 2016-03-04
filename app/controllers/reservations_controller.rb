@@ -77,9 +77,10 @@ class ReservationsController < ApplicationController
   def update
     @reservation = Reservation.find(params[:id])
     old_playday = Playday.find_by_date(@reservation.date)
+    six = @reservation.six_hundred || 0
+    eight = @reservation.eight_hundred || 0
+    old_total_reservations = six + eight
     @reservation.assign_attributes(reservation_params)
-
-
 
     times = {
       "8 am" => "eight_am",
@@ -101,7 +102,7 @@ class ReservationsController < ApplicationController
     now = Time.at(Time.now.utc + Time.zone_offset('PST'))
     formatted_now = (now.strftime("%m-%d-%Y").to_s)
     if formatted_now >= @reservation.date #&& current_user.standard?
-      flash[:alert] = "Online reservations cannot be updated on the same day of the activity. To update by phone call 310-510-1777."
+      flash[:alert] = "Online reservations cannot be updated on the same day as your selected Date. To update by phone call 310-510-1777."
       return render :edit
     end
     six = @reservation.six_hundred || 0
@@ -127,7 +128,7 @@ class ReservationsController < ApplicationController
     new_num =  "#{(@playday.send(attribute) - total_reservations)}"
     @playday.update_attribute(attribute.to_sym, new_num)
 
-    new_count =  "#{(old_playday.send(attribute) + total_reservations)}"
+    new_count =  "#{(old_playday.send(attribute) + old_total_reservations)}"
     old_playday.update_attribute(attribute.to_sym, new_count)
 
     if @reservation.save
