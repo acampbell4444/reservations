@@ -1,4 +1,42 @@
-<h1>Reservations#edit<br><br>
-  This page under construction <br><br>
-Implementing Update code
-</h1>
+<% if current_user.present? %>
+<div style="float:left">
+  <div class="jumbotron">
+    <h4 style="color:black"><small>Reservation for</small><br> <%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %> </h4><br>
+    <%= simple_form_for @reservation, validate: true do |reservation| %>
+      <strong>Time<br></strong>
+      <div class="row">
+        <div style="float:left; padding-left:20px">
+          <small><%= reservation.input_field :time, as: :radio_buttons, collection: ["8 am","9 am","10 am", "11 am", "12 pm", "1 pm", "2 pm","3 pm", "4 pm", "5 pm", "6 pm", "7 pm"] %></small>
+        </div>
+        <small>
+        <div style="padding-top: 10px; color: blue"> &nbsp&nbsp <%= @playday.eight_am || nil%> seats available</div>
+        <div style="padding-top: 9px; color: blue"> &nbsp&nbsp <%= @playday.nine_am || nil%> seats available </div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.ten_am || nil %> seats available</div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.eleven_am || nil%> seats available</div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.twelve_pm || nil%> seats available</div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.one_pm || nil%> seats available</div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.two_pm || nil%> seats available</div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.three_pm || nil%> seats available</div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.four_pm || nil%> seats available</div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.five_pm || nil%> seats available</div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.six_pm || nil%> seats available</div>
+        <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.seven_pm || nil %> seats available</div><br>
+          </small>
+      </div>
+        <%= reservation.input :date, placeholder: "Pick Date", label: false, :input_html => {:style => 'color: green; float: left; width: 50%'} %>
+      <div style="padding-left:0px;font-weight:bold">Enter Number of Participants</div>
+      <div class="row">
+        <div style="padding-left:20px;"><small>600 ft. - $65 per person </small><%= reservation.input_field :six_hundred, collection: 0..15, default: 0, :input_html => {:style => 'width: 25%'} %></div>
+        <div style="padding-left:20px;"><small>800 ft. - $75 per person </small><%= reservation.input_field :eight_hundred, collection: 0..15, default: 0, :input_html => {:style => 'width: 25%'} %></div>
+      </div><br>
+      <span style="padding-left:0px;font-weight:bold">Number of Photo Packages</span>
+      <div style="padding-left:10px;"><small>$30 each </small><%= reservation.input_field :photo, collection: 0..5, default: 0, :input_html => {:style => 'width: 25%'} %></div><br>
+      <span style="padding-left:0px;font-weight:bold">Discount Code</span>
+      <div><%= reservation.input_field :discount, placeholder: "Only one code allowed", :input_html => {:style => 'width: 65%'}%></div><br>
+      <span style="padding-left:0px;font-weight:bold; text-align:center"><%= reservation.submit class: 'btn btn-success' %></span>
+    <% end %>
+  </div>
+</div>
+
+
+<% end %>

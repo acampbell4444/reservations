@@ -24,18 +24,28 @@
         <li style="font-weight:bold"><%= link_to "Sign In", new_user_session_path, :class => 'navbar-link'  %></li>
         <% end%>
       <div class="row">
-
-
       </div>
     </ul>
+<div class="row">
+  <div style="padding-left:20px;">
+      <div class="panel panel-primary">
+          <div style="padding-left:5px; padding-right:5px; padding-top:2px; background-color:#FFFF99;float:left">
+    <span style="padding-left:5px;font-weight:bold; text-align:center">Check Availabilities Here!</span>
     <%= simple_form_for :playday, :defaults => {:required => false}, url: :playdays, wrapper_html: {class: "form-inline"}, 'data-no-turbolink' => true do |f| %>
+
         <br>
+
         <div class="row">
         <div style="float:left; padding-left:20px"><span style="font-size:25px;color:blue; padding-right:5px"><span class="glyphicon glyphicon-calendar"></span></span></div>
         <%= f.input :date, placeholder: "Pick Date", label: false, :input_html => {:style => 'color: green; float: left; width: 50%'} %>
       </div>
         <%= f.button :submit, 'Click here after selecting date', :class => "btn-primary", :input_html => {:style => 'float:right'} %>
+          </div>
+        </div>
+      </div>
       <% end %><br>
+    </div>
+
 
 
     <% if flash[:notice] %>

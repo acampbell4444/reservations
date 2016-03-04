@@ -52,7 +52,7 @@ class ReservationsController < ApplicationController
     end
     if attribute.nil?
       flash[:alert] = "Must choose a Departure Time"
-      return redirect_to :back
+      return redirect_to request.referrer
     end
       if (@playday.send(attribute) - total_reservations) < 0
         flash[:alert] = "Too many Seats Selected. Only #{@playday.send(attribute)} spots available for #{@reservation.time}."
@@ -71,11 +71,70 @@ class ReservationsController < ApplicationController
 
   def edit
     @reservation = Reservation.find(params[:id])
+    @playday = Playday.find_by_date(@reservation.date)
   end
 
   def update
+    @reservation = Reservation.find(params[:id])
+    #@playday = Playday.find_by_date(@reservation.date)
+    @reservation.assign_attributes(reservation_params)
 
+    times = {
+      "8 am" => "eight_am",
+      "9 am" => "nine_am",
+      "10 am" => "ten_am",
+      "11 am" => "eleven_am",
+      "12 pm" => "twelve_pm",
+      "1 pm" => "one_pm",
+      "2 pm" => "two_pm",
+      "3 pm" => "three_pm",
+      "4 pm" => "four_pm",
+      "5 pm" => "five_pm",
+      "6 pm" => "six_pm",
+      "7 pm" => "seven_pm",
+      "8 pm" => "eight_pm",
+    }
+
+    @playday = Playday.find_by date: @reservation.date
+    now = Time.at(Time.now.utc + Time.zone_offset('PST'))
+  formatted_now = (now.strftime("%m-%d-%Y").to_s)
+    if formatted_now >= @reservation.date #&& current_user.standard?
+      flash[:alert] = "Online reservations cannot be updated on the same day of the activity. To update by phone call 310-510-1777."
+      return render :edit
+    end
+    @reservation.date = @playday.date
+    six = @reservation.six_hundred || 0
+    eight = @reservation.eight_hundred || 0
+    total_reservations = six + eight
+    attribute = times[@reservation.time]
+    if total_reservations == 0
+      flash[:alert] = "Must Choose at least One Passenger."
+      return redirect_to :back
+    end
+    if attribute.nil?
+      flash[:alert] = "Must choose a Departure Time"
+      return redirect_to request.referrer
+    end
+
+    if (@playday.send(attribute) - total_reservations) < 0
+      flash[:alert] = "Too many Seats Selected. Only #{@playday.send(attribute)} spots available for #{@reservation.time}."
+      return redirect_to :back
+    end
+
+    if @reservation.save
+      flash[:notice] = "Reservation was saved."
+      redirect_to [@reservation]
+    else
+      flash.now[:alert] = "There was an error saving the reservation. Please try again."
+      render "playdays/show"
+    end
   end
+
+
+
+
+
+
 
   def show
     @reservation = Reservation.find(params[:id])
