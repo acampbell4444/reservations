@@ -1,6 +1,7 @@
 <div class="jumbotron">
 * I am currently adding update functionality
 <h3>Thanks for Making a Reservation!</h3>
+Name: <%= @reservation.user.lastname %>, <%= @reservation.user.firstname %><br>
 Email: <%= @reservation.user.email %><br>
 Reservation Id: <%= @reservation.id %><br>
 600': <%= @reservation.six_hundred %><br>
@@ -9,6 +10,7 @@ Date: <%= @reservation.date%><br>
 Time: <%= @reservation.time %><br>
 Photo: <%= @reservation.photo %><br>
 Discount Code: <%= @reservation.discount %><br>
+Comments: <%= @reservation.comments %><br>
 Total Price: $<%= @reservation.total_estimate %>
 <br><br>
 

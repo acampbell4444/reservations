@@ -172,7 +172,7 @@ class ReservationsController < ApplicationController
       new_num =  "#{(@playday.send(attribute) + total_reservations)}"
       @playday.update_attribute(attribute.to_sym, new_num)
 
-      flash[:notice] = "#{@reservation.user.email}'s reservation # #{@reservation.id} for #{@reservation.date} was deleted successfully."
+      flash[:notice] = "#{@reservation.user.firstname} #{@reservation.user.lastname}'s reservation (Id # #{@reservation.id}) for #{@reservation.date}- was deleted successfully."
       redirect_to root_path
     else
       flash.now[:alert] = "There was an error deleting the reservation."
@@ -183,7 +183,7 @@ class ReservationsController < ApplicationController
 private
 
 def reservation_params
-  params.require(:reservation).permit(:six_hundred, :eight_hundred, :date, :time, :photo, :discount, :playday_id )
+  params.require(:reservation).permit(:six_hundred, :eight_hundred, :date, :time, :photo, :discount, :playday_id, :comments )
 end
 
 end
