@@ -7,11 +7,13 @@
     by last name for easy updates and cancellations<br><br><br>
   <strong>
 
-
+<div class="row">
+  <div class="col-md-8">
 <h4>
 <% @reservations.each do |reservation| %>
 <%= link_to reservation.date, reservation %>&nbsp&nbsp
 <%= reservation.user.email %><br>
 <% end %>
-
 </h4>
+</div>
+</div>
