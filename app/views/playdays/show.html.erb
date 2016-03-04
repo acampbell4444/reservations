@@ -2,9 +2,10 @@
 Online reservations must be made by no later than 8pm on the day before the activity day. To reserve by phone call 310-510-1777<br><br>
 <% unless current_user.present? %>
 
+    <div style="float:left">
     <div class="jumbotron">
       <div class="row">
-        <div style="float:left;padding-left:25px">
+        <div style="float:left; padding-left:25px">
           <h3><%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %></h3>
           <strong>
           <div style="padding-top: 10px; color: blue">8:00 am &nbsp&nbsp&nbsp <%= @playday.eight_am || nil%> seats available</div>
@@ -19,19 +20,21 @@ Online reservations must be made by no later than 8pm on the day before the acti
           <div style="padding-top: 8px; color: blue"> 5:00 pm &nbsp&nbsp&nbsp <%= @playday.five_pm || nil%> seats available</div>
           <div style="padding-top: 8px; color: blue"> 6:00 pm &nbsp&nbsp&nbsp <%= @playday.six_pm || nil%> seats available</div>
           <div style="padding-top: 8px; color: blue"> 7:00 pm &nbsp&nbsp&nbsp <%= @playday.seven_pm || nil %> seats available</div><br>
-        </strong>
-        </div>
-
-          <div style="float:right; padding-top: 0px; padding-right:0px; text-align:center">
-            <h3>Make a Reservation</h3><br>
-            <h4>If you are a New User<br><br>
-            <%= link_to "Enter Your Email Address Here", new_user_registration_path, class: 'btn btn-success' %><br><br><br>
-            <br>
-             If you have a User Account</h4><br>  <%= link_to "Sign in Here", new_user_session_path, class: 'btn btn-primary' %><br><br>
-
-          </div>
+          </strong>
         </div>
       </div>
+
+      <div class="row">
+        <div style="padding-top: 0px; padding-left:25px">
+          <h3>Make a Reservation</h3><br>
+            <h4>If you are a New User<br><br>
+            <%= link_to "Enter Your Email Address Here", new_user_registration_path, class: 'btn btn-success' %><br><br><br>
+            <br>If you have a User Account</h4><br>
+            <%= link_to "Sign in Here", new_user_session_path, class: 'btn btn-primary' %><br><br>
+        </div>
+      </div>
+    </div>
+  </div>
         <% end %>
 
 <% if current_user.present? %>
@@ -74,9 +77,5 @@ Online reservations must be made by no later than 8pm on the day before the acti
   </div>
 </div>
 
-<div style="float:right">
-  <div class="jumbotron">
-    <h4>Still need to add input fields: first name, last name, etc-  to reservation form.<h4>
-  </div>
-</div>
+
 <% end %>
