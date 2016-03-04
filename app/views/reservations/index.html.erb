@@ -12,7 +12,7 @@
 <small>
 <% @reservations.each do |reservation| %>
 <%= link_to reservation.date, reservation %>&nbsp&nbsp
-<%= reservation.user.email %><br>
+ <%= reservation.time %> <%= reservation.user.email %> <br>
 <% end %>
 </small>
 </div>

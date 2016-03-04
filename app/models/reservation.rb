@@ -12,6 +12,7 @@ class Reservation < ActiveRecord::Base
 
   after_create :update_playday_slots
   default_scope { order('date ASC') }
+  default_scope { order('time ASC') }
 
 
   extend FriendlyId
