@@ -40,9 +40,13 @@
 <% if current_user.present? %>
 <div style="float:left">
   <div class="jumbotron">
-    <h4 style="color:black"><h3>New Reservation</h3> <%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %> </h4><br>
-    <br><%= simple_form_for @reservation, validate: true do |reservation| %>
-      <strong>Time<br></strong>
+    <span style="font-size:20px"><span class="glyphicon glyphicon-arrow-up"></span></span><small><small>
+    use the availability selector to<br> chose a new reservation date </small></small>
+    <h4 style="color:black"><h3>New Reservation</h3>
+      <br><strong>Date</strong><br><%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %> </h4>
+    <br>
+    <%= simple_form_for @reservation, validate: true do |reservation| %>
+      <br><strong>Time<br></strong>
       <div class="row">
         <div style="float:left; padding-left:20px">
           <small><%= reservation.input_field :time, as: :radio_buttons, collection: ["8 am","9 am","10 am", "11 am", "12 pm", "1 pm", "2 pm","3 pm", "4 pm", "5 pm", "6 pm", "7 pm"] %></small>
