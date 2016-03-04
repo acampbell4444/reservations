@@ -1,4 +1,4 @@
-<h1>My Reservations</h1>
+<h3>My Reservations</h3>
 
 <strong>This index view will be scoped based on User roles.<br>
   Admin users will be able to see all reservations organized<br>
@@ -9,11 +9,11 @@
 
 <div class="row">
   <div class="col-md-8">
-<h4>
+<small>
 <% @reservations.each do |reservation| %>
 <%= link_to reservation.date, reservation %>&nbsp&nbsp
 <%= reservation.user.email %><br>
 <% end %>
-</h4>
+</small>
 </div>
 </div>
