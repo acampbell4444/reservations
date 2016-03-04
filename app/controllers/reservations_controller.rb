@@ -76,8 +76,10 @@ class ReservationsController < ApplicationController
 
   def update
     @reservation = Reservation.find(params[:id])
-    #@playday = Playday.find_by_date(@reservation.date)
+    old_playday = Playday.find_by_date(@reservation.date)
     @reservation.assign_attributes(reservation_params)
+
+
 
     times = {
       "8 am" => "eight_am",
@@ -97,29 +99,36 @@ class ReservationsController < ApplicationController
 
     @playday = Playday.find_by date: @reservation.date
     now = Time.at(Time.now.utc + Time.zone_offset('PST'))
-  formatted_now = (now.strftime("%m-%d-%Y").to_s)
+    formatted_now = (now.strftime("%m-%d-%Y").to_s)
     if formatted_now >= @reservation.date #&& current_user.standard?
       flash[:alert] = "Online reservations cannot be updated on the same day of the activity. To update by phone call 310-510-1777."
       return render :edit
     end
-    @reservation.date = @playday.date
     six = @reservation.six_hundred || 0
     eight = @reservation.eight_hundred || 0
     total_reservations = six + eight
     attribute = times[@reservation.time]
+
+
     if total_reservations == 0
-      flash[:alert] = "Must Choose at least One Passenger."
-      return redirect_to :back
+      flash[:alert] = "Must Choose at least One Passenger, or cancel reservation."
+      return render :edit
     end
     if attribute.nil?
       flash[:alert] = "Must choose a Departure Time"
-      return redirect_to request.referrer
+      return render :edit
     end
 
     if (@playday.send(attribute) - total_reservations) < 0
       flash[:alert] = "Too many Seats Selected. Only #{@playday.send(attribute)} spots available for #{@reservation.time}."
-      return redirect_to :back
+      return render :edit
     end
+
+    new_num =  "#{(@playday.send(attribute) - total_reservations)}"
+    @playday.update_attribute(attribute.to_sym, new_num)
+
+    new_count =  "#{(old_playday.send(attribute) + total_reservations)}"
+    old_playday.update_attribute(attribute.to_sym, new_count)
 
     if @reservation.save
       flash[:notice] = "Reservation was saved."
@@ -129,12 +138,6 @@ class ReservationsController < ApplicationController
       render "playdays/show"
     end
   end
-
-
-
-
-
-
 
   def show
     @reservation = Reservation.find(params[:id])
