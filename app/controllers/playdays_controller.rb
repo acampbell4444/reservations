@@ -16,11 +16,11 @@ class PlaydaysController < ApplicationController
 
     #raise "#{Playday.first.date}"
     if current_user.nil?
-      taco = Playday.find_by_date(formatted_now)
-      redirect_to taco
+      show_day = Playday.find_by_date(formatted_now)
+      redirect_to show_day
     else
-      taco = Playday.find_by_date(  plus_one_day_formatted )
-      redirect_to taco
+      show_day = Playday.find_by_date(  plus_one_day_formatted )
+      redirect_to show_day 
     end
   end
 

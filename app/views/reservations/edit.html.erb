@@ -21,6 +21,14 @@
       <div style="padding-left:10px;"><small>$30 each </small><%= reservation.input_field :photo, collection: 0..5, default: 0, :input_html => {:style => 'width: 25%'} %></div><br>
       <span style="padding-left:0px;font-weight:bold">Discount Code</span>
       <div><%= reservation.input_field :discount, placeholder: "Only one code allowed", :input_html => {:style => 'width: 65%'}%></div><br>
+      <% if current_user.admin? %>
+        <small>
+        <br> <%= reservation.input :customer_email %>
+         <%= reservation.input :customer_first_name %>
+         <%= reservation.input :customer_last_name %>
+        <%= reservation.input :customer_phone_number %>
+      </small>
+      <% end %>
       <span style="padding-left:0px;font-weight:bold; text-align:center"><%= reservation.submit class: 'btn btn-success' %></span>
     <% end %>
   </div>
