@@ -1,13 +1,16 @@
 
 <% unless current_user.present? %>
-<%= Date.today %>
-<%= Time.at(Time.now.utc + Time.zone_offset('PST')).strftime('%m-%d-%Y').to_s %>
 
     <div style="float:left">
     <div class="jumbotron">
       <div class="row">
         <div style="float:left; padding-left:25px">
           <h3><%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %></h3>
+          <% now = Time.at(Time.now.utc + Time.zone_offset('PST')) %>
+          <% formatted_now = (now.strftime("%m-%d-%Y").to_s) %>
+        <% if (current_user.nil? || current_user.standard?) && (@playday.date <= formatted_now) %>
+        <span style="color:red"> <small>*online reservations must be made by 8pm on the night prior to activty</small></span>
+          <% end %>
           <strong>
           <div style="padding-top: 10px; color: blue">8:00 am &nbsp&nbsp&nbsp <%= @playday.eight_am || nil%> seats available</div>
           <div style="padding-top: 9px; color: blue"> 9:00 am &nbsp&nbsp&nbsp <%= @playday.nine_am || nil%> seats available </div>
