@@ -1,4 +1,4 @@
-playdate = Time.zone.now.to_date
+playdate = Date.yesterday
 
 user = User.new(
   firstname: "administrator",
