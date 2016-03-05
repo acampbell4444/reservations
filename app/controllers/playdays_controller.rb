@@ -15,12 +15,13 @@ class PlaydaysController < ApplicationController
      end
 
     #raise "#{Playday.first.date}"
-
-    taco = Playday.find_by_date(formatted_now)
-    redirect_to taco
-
-
-
+    if current_user.nil?
+      taco = Playday.find_by_date(formatted_now)
+      redirect_to taco
+    else
+      taco = Playday.find_by_date(  plus_one_day_formatted )
+      redirect_to taco
+    end
   end
 
   def redirect

@@ -43,7 +43,8 @@ class ReservationsController < ApplicationController
       formatted_plus_4 = (now_plus_4.strftime("%m-%d-%Y").to_s)
       formatted_plus_4
       if formatted_plus_4 >= @reservation.date && current_user.standard?
-        flash[:alert] = "Online reservations must be made by no later than 8pm on the day before the activity. No online reservation dates can be later than #{Playday.last.date}. To reserve by phone call 310-510-1777."
+        flash[:alert] = "Online reservations must be made by no later than 8pm on the day before the activity. No online reservation dates
+        can be later than #{Playday.last.date}. To reserve by phone call 310-510-1777."
         return redirect_to :back
       end
       @reservation.date = @playday.date
