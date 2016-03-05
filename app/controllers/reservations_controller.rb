@@ -1,7 +1,11 @@
 class ReservationsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @reservations = Reservation.all # need to scope this
+    if current_user.admin?
+      @reservations = Reservation.all
+    elsif current_user.standard?
+      @reservations = Reservation.all.where(user: current_user)
+    end
   end
 
   def new
@@ -38,7 +42,7 @@ class ReservationsController < ApplicationController
       formatted_plus_4 = (now_plus_4.strftime("%m-%d-%Y").to_s)
       formatted_plus_4
       if formatted_plus_4 >= @reservation.date && current_user.standard?
-        flash[:alert] = "Online reservations must be made by no later than 8pm on the day before the activity. To reserve by phone call 310-510-1777."
+        flash[:alert] = "Online reservations must be made by no later than 8pm on the day before the activity. No online reservation dates can be later than #{Playday.last.date}. To reserve by phone call 310-510-1777."
         return redirect_to :back
       end
       @reservation.date = @playday.date

@@ -10,7 +10,7 @@
           <% now = Time.at(Time.now.utc + Time.zone_offset('PST')) %>
           <% formatted_now = (now.strftime("%m-%d-%Y").to_s) %>
         <% if (current_user.nil? || current_user.standard?) && (@playday.date <= formatted_now) %>
-        <span style="color:red"> <small>*online reservations must be made by 8pm on the night prior to activty</small></span>
+        <span style="color:red"> <small>*online reservations must be made by 8pm on the night prior to activty</small></span><br>
           <% end %>
           <small>
           <div style="padding-top: 10px; color: black">8:00 am &nbsp&nbsp&nbsp <%= @playday.eight_am || nil%> seats available</div>
@@ -55,7 +55,7 @@ role: <%= current_user.role %>
     use the availability selector to<br> chose a new reservation date </small></small><br>
     <% today = Date.today.strftime('%m-%d-%Y') %>
     <% if current_user.standard? && (@playday.date <= today) %>
-    <span style="color:red"><small>*reservations must be made by 8pm on the night prior to the activity</small></span>
+    <span style="color:red"><small>*reservations must be made by 8pm on the night prior to the activity</small></span><br>
     <% end %>
       <span style="color:orange;font-weight:bold; font-size:20px"><%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %> </span>
     <%= simple_form_for @reservation, validate: true do |reservation| %>
