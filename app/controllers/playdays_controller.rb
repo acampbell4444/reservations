@@ -11,7 +11,7 @@ class PlaydaysController < ApplicationController
 
     @playdays = Playday.all
     if current_user.nil? || current_user.standard?
-     @playdays = Playday.where("date > ?", formatted_now)
+     @playdays = Playday.where("date >= ?", formatted_now)
      end
 
     #raise "#{Playday.first.date}"
