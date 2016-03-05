@@ -4,6 +4,7 @@ user = User.new(
   firstname: "administrator",
   lastname: "jones",
   email: "admin@example.com",
+  phone: "555-555-5555",
   password: 'password',
   password_confirmation: 'password',
   role: 'admin')
@@ -14,6 +15,7 @@ user = User.new(
   firstname: "standard",
   lastname: "jones",
   email: "standard@example.com",
+  phone: "555-555-5555",
   password: 'password',
   password_confirmation: 'password',
   role: 'standard')

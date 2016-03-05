@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :roles
   validates :firstname, :presence => true
   validates :lastname, :presence => true
+  validates :phone, :presence => true
 
   before_create :set_default_role
   # Include default devise modules. Others available are:

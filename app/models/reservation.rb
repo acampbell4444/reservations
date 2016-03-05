@@ -56,6 +56,10 @@ class Reservation < ActiveRecord::Base
     end
   end
 
+  def total_flights
+    (self.six_hundred || 0) + (self.eight_hundred || 0)
+  end
+
   def eight
     if self.eight_hundred.nil?
       0

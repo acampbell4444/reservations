@@ -1,18 +1,36 @@
 <h3>My Reservations</h3>
 
-<strong>This index view will be scoped based on User roles.<br>
-  Admin users will be able to see all reservations organized<br>
-   by date. Standard users will see only their own reservations.<br><br>
-   There will also be a search feature that searches<br>
-    by last name for easy updates and cancellations<br><br><br>
-  <strong>
-
 <div class="row">
   <div class="col-md-8">
 <small>
-<% @reservations.each do |reservation| %>
-<%= link_to reservation.date, reservation %>&nbsp&nbsp
- <%= reservation.time %> <%= reservation.user.email %> <br>
+<% if current_user.standard? %>
+  <% if @reservations.count >= 1 %>
+    <% @reservations.each do |reservation| %>
+    <div class="row">
+      <%= link_to reservation.date, reservation %>&nbsp |
+      <%= reservation.time %> | <span style="color:orange"><%= reservation.total_flights %></span> | <%= reservation.user.lastname %>, <%= reservation.user.firstname %><br>
+    </div>
+    <% end %>
+  <% else %>
+  You do not have any reservations at this time.<br>
+  Pick a Date above to see Availabilities.
+  <% end %>
+<% elsif current_user.admin? %>
+  <% @reservations.each do |reservation| %>
+    <% if reservation.user.standard? %>
+    <div class="row">
+      <%= link_to reservation.date, reservation %>&nbsp |
+      <%= reservation.time %> | <span style="color:orange"><%= reservation.total_flights %></span> |
+      <%= reservation.user.lastname %>, <%= reservation.user.firstname %><br>
+    </div>
+    <% elsif reservation.user.admin? %>
+    <div class="row">
+      <%= link_to reservation.date, reservation %>&nbsp |
+      <%= reservation.time %> | <span style="color:orange"><%= reservation.total_flights %></span> |
+      <%= reservation.customer_last_name %>, <%= reservation.customer_first_name %><br>
+    </div>
+    <% end %>
+  <% end %>
 <% end %>
 </small>
 </div>

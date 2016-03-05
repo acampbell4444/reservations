@@ -1,12 +1,9 @@
 <div class="jumbotron">
-* I am currently adding update functionality
-<h3>Thanks for Making a Reservation!</h3>
-Name: <%= @reservation.user.lastname %>, <%= @reservation.user.firstname %><br>
-User Email: <%= @reservation.user.email %><br>
-<% if current_user.admin? %>
+<h3>This is Your Reservation Info!</h3>
+<% if current_user.admin? && @reservation.user.admin? %><strong>
+Customer Name: <%= @reservation.customer_last_name %>, <%= @reservation.customer_first_name %><br>
 Customer Email: <%= @reservation.customer_email %><br>
-<% end %>
-Phone Number: <%= @reservation.user.phone %><br>
+Customer Phone Number: <%= @reservation.customer_phone_number %></strong><br>
 Reservation Id: <%= @reservation.id %><br>
 600': <%= @reservation.six_hundred %><br>
 800': <%= @reservation.eight_hundred %><br>
@@ -15,7 +12,25 @@ Time: <%= @reservation.time %><br>
 Photo: <%= @reservation.photo %><br>
 Discount Code: <%= @reservation.discount %><br>
 Comments: <%= @reservation.comments %><br>
-Total Price: $<%= @reservation.total_estimate %>
+Total Price: $<%= @reservation.total_estimate %><br>
+<span style="color:orange"><small>made by: <%= @reservation.user.firstname %></span>
+<% else %>
+Name: <%= @reservation.user.lastname %>, <%= @reservation.user.firstname %><br>
+Email: <%= @reservation.user.email %><br>
+Phone: <%= @reservation.user.phone %><br>
+Reservation Id: <%= @reservation.id %><br>
+600': <%= @reservation.six_hundred %><br>
+800': <%= @reservation.eight_hundred %><br>
+Date: <%= @reservation.date%><br>
+Time: <%= @reservation.time %><br>
+Photo: <%= @reservation.photo %><br>
+Discount Code: <%= @reservation.discount %><br>
+Comments: <%= @reservation.comments %><br>
+Total Price: $<%= @reservation.total_estimate %><br><br>
+<%= link_to "Click here", edit_user_registration_path, style: "color:orange" %>
+to update your contact info
+<% end %>
+
 <br><br>
 
 <%= link_to "Edit Reservation", edit_reservation_path(@reservation), class: 'btn btn-success btn-xs' %>
