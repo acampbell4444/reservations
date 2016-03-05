@@ -16,7 +16,7 @@ class PlaydaysController < ApplicationController
 
     #raise "#{Playday.first.date}"
 
-    taco = Playday.find_by_date(plus_one_day_formatted)
+    taco = Playday.find_by_date(formatted_now)
     redirect_to taco
 
 

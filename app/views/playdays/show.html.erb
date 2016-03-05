@@ -10,7 +10,8 @@
           <% now = Time.at(Time.now.utc + Time.zone_offset('PST')) %>
           <% formatted_now = (now.strftime("%m-%d-%Y").to_s) %>
         <% if (current_user.nil? || current_user.standard?) && (@playday.date <= formatted_now) %>
-        <span style="color:red"> <small>*online reservations must be made by 8pm on the night prior to activty</small></span><br>
+        <span style="color:red"> <small>* Online reservations must be made by 8pm on the night prior to activity.<br>
+          To reserve by phone call 310-510-1777.</small></span>
           <% end %>
           <small>
           <div style="padding-top: 10px; color: black">8:00 am &nbsp&nbsp&nbsp <%= @playday.eight_am || nil%> seats available</div>
