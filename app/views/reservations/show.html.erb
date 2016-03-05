@@ -15,7 +15,6 @@ Comments: <%= @reservation.comments %><br>
 Total Price: $<%= @reservation.total_estimate %><br>
 <span style="color:orange"><small>made by: <%= @reservation.user.firstname %></span>
 <% else %>
-timez: <%= @reservation.timez %><br>
 Name: <%= @reservation.user.lastname %>, <%= @reservation.user.firstname %><br>
 Email: <%= @reservation.user.email %><br>
 Phone: <%= @reservation.user.phone %><br>
