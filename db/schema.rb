@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304230533) do
+ActiveRecord::Schema.define(version: 20160305011344) do
 
   create_table "calculators", force: :cascade do |t|
     t.integer  "eight_hundred"
@@ -64,14 +64,15 @@ ActiveRecord::Schema.define(version: 20160304230533) do
     t.integer  "eight_hundred"
     t.string   "date"
     t.string   "time"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "playday_id"
     t.string   "discount"
     t.integer  "user_id"
     t.integer  "photo"
     t.string   "slug"
     t.string   "comments"
+    t.string   "customer_email"
   end
 
   add_index "reservations", ["playday_id"], name: "index_reservations_on_playday_id"
@@ -93,6 +94,8 @@ ActiveRecord::Schema.define(version: 20160304230533) do
     t.datetime "updated_at",                          null: false
     t.string   "firstname"
     t.string   "lastname"
+    t.string   "phone"
+    t.string   "role"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

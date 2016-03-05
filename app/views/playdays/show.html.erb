@@ -37,11 +37,18 @@
         <% end %>
 
 <% if current_user.present? %>
+role: <%= current_user.role %>
+
 <div style="float:left">
   <div class="jumbotron">
-    <span style="font-size:20px"><span class="glyphicon glyphicon-arrow-up"></span></span><small><small>
+    <span style="font-size:20px; color:blue"><span class="glyphicon glyphicon-arrow-up"></span></span><small><small>
     use the availability selector to<br> chose a new reservation date </small></small>
     <h4 style="color:black"><h3>New Reservation</h3>
+    <% today = Date.today.strftime('%m-%d-%Y') %>
+    <% if current_user.standard? && (@playday.date <= today) %>
+    <span style="color:red"><small>*reservations must be made by 8pm on the night prior to the activity</small></span>
+    <% end %>
+
       <br><strong>Date</strong><br><%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %> </h4>
     <br>
     <%= simple_form_for @reservation, validate: true do |reservation| %>
@@ -75,6 +82,9 @@
       <div style="padding-left:10px;"><small>$30 each </small><%= reservation.input_field :photo, collection: 0..5, default: 0, :input_html => {:style => 'width: 25%'} %></div><br>
       <span style="padding-left:0px;font-weight:bold">Discount Code</span>
       <div><%= reservation.input_field :discount, placeholder: "Only one code allowed", :input_html => {:style => 'width: 65%'}%></div>
+      <% if current_user.admin? %>
+      <br> <%= reservation.input :customer_email %>
+      <% end %>
       <br> <%= reservation.input :comments %>
 
       <span style="padding-left:0px;font-weight:bold; text-align:center"><%= reservation.submit class: 'btn btn-success' %></span>

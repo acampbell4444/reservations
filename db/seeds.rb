@@ -1,5 +1,26 @@
-playdate = (Date.today+1)
-365.times do
+playdate = (Date.today)
+
+user = User.new(
+  firstname: "administrator",
+  lastname: "jones",
+  email: "admin@example.com",
+  password: 'password',
+  password_confirmation: 'password',
+  role: 'admin')
+
+  user.save!
+
+  user = User.new(
+  firstname: "standard",
+  lastname: "jones",
+  email: "standard@example.com",
+  password: 'password',
+  password_confirmation: 'password',
+  role: 'standard')
+
+  user.save!
+
+730.times do
   Playday.create!(
     seven_am: 15,
     eight_am: 15,
@@ -22,3 +43,4 @@ end
 
 puts "Seeds Finished"
 puts "#{Playday.count} playdays created"
+puts "#{User.count} users created"

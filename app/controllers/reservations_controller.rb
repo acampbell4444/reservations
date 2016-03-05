@@ -37,7 +37,7 @@ class ReservationsController < ApplicationController
       now_plus_4 = Time.at(Time.now.utc + Time.zone_offset('PST')) + 4.hours
       formatted_plus_4 = (now_plus_4.strftime("%m-%d-%Y").to_s)
       formatted_plus_4
-      if formatted_plus_4 >= @reservation.date #&& current_user.standard?
+      if formatted_plus_4 >= @reservation.date && current_user.standard?
         flash[:alert] = "Online reservations must be made by no later than 8pm on the day before the activity. To reserve by phone call 310-510-1777."
         return redirect_to :back
       end
@@ -183,7 +183,7 @@ class ReservationsController < ApplicationController
 private
 
 def reservation_params
-  params.require(:reservation).permit(:six_hundred, :eight_hundred, :date, :time, :photo, :discount, :playday_id, :comments )
+  params.require(:reservation).permit(:six_hundred, :eight_hundred, :date, :time, :photo, :discount, :playday_id, :comments, :customer_email )
 end
 
 end
