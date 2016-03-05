@@ -3,6 +3,7 @@ class ReservationsController < ApplicationController
   def index
     if current_user.admin?
       @reservations = Reservation.all
+      #@reservations.reorder('time DESC')
     elsif current_user.standard?
       @reservations = Reservation.all.where(user: current_user)
     end

@@ -90,12 +90,14 @@ role: <%= current_user.role %>
       <span style="padding-left:0px;font-weight:bold">Discount Code</span>
       <div><%= reservation.input_field :discount, placeholder: "Only one code allowed", :input_html => {:style => 'width: 65%'}%></div>
       <% if current_user.admin? %>
+      <small>
       <br> <%= reservation.input :customer_email %>
        <%= reservation.input :customer_first_name %>
        <%= reservation.input :customer_last_name %>
       <%= reservation.input :customer_phone_number %>
+    </small>
       <% end %>
-    <%= reservation.input :comments %>
+    <small><%= reservation.input :comments %></small>
 
       <span style="padding-left:0px;font-weight:bold; text-align:center"><%= reservation.submit class: 'btn btn-success' %></span>
 
