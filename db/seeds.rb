@@ -1,5 +1,4 @@
-
-playdate = Time.at(Time.now.utc + Time.zone_offset('PST'))
+playdate = Time.zone.now.to_date
 
 user = User.new(
   firstname: "administrator",

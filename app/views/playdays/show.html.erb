@@ -1,5 +1,7 @@
 
 <% unless current_user.present? %>
+<%= Date.today %>
+<%= Time.at(Time.now.utc + Time.zone_offset('PST')).strftime('%m-%d-%Y').to_s %>
 
     <div style="float:left">
     <div class="jumbotron">
