@@ -3,7 +3,6 @@ class ReservationsController < ApplicationController
   def index
     if current_user.admin?
       @reservations = Reservation.all
-      #@reservations.reorder('time DESC')
     elsif current_user.standard?
       @reservations = Reservation.all.where(user: current_user)
     end
@@ -22,6 +21,7 @@ class ReservationsController < ApplicationController
       @playday = Playday.current_scope
       @reservation = Reservation.new(reservation_params)
       @reservation.user = current_user
+
 
       times = {
         "8 am" => "eight_am",
@@ -65,15 +65,34 @@ class ReservationsController < ApplicationController
         return redirect_to :back
       end
 
-      if @reservation.save
-        flash[:notice] = "Reservation was saved."
-        redirect_to [@reservation]
-      else
-        flash.now[:alert] = "There was an error saving the reservation. Please try again."
-        render "playdays/show"
+        if @reservation.valid?
+          begin
+            Stripe::Customer.create(
+             email: @reservation.customer_email || current_user.email,
+             description: "customer name: #{@reservation.customer_last_name},
+             #{@reservation.customer_first_name}, phone: #{@reservation.customer_phone_number},
+             res. created by user##{@reservation.user.id}",
+             card: params[:stripeToken]
+           )
+
+           rescue Stripe::CardError => e
+             charge_error = e.message
+           end
+
+           if charge_error
+             flash[:error] = charge_error
+             redirect_to :back
+           else @reservation.save
+             flash[:notice] = "Reservation was saved."
+             redirect_to [@reservation]
+           end
+        else
+          flash.now[:alert] = "There was an error saving the reservation. Please try again."
+          render "playdays/show"
+        end
       end
     end
-  end
+
 
   def edit
     @reservation = Reservation.find(params[:id])

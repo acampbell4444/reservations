@@ -58,7 +58,7 @@
     <% end %>
       <span style="color:orange;font-weight:bold; font-size:20px"><%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %> </span>
     <%= simple_form_for @reservation, validate: true do |reservation| %>
-      <br><strong>Time<br></strong>
+      <br><small><strong>Time<br></strong></small>
       <div class="row">
         <div style="float:left; padding-left:20px">
           <small><%= reservation.input_field :time, as: :radio_buttons, collection: ["8 am","9 am","10 am", "11 am", "12 pm", "1 pm", "2 pm","3 pm", "4 pm", "5 pm", "6 pm", "7 pm"], checked: "" %></small>
@@ -79,14 +79,21 @@
           </small>
       </div>
       <%= reservation.input :date, :as => :hidden, input_html: { value: @playday.date } %>
-      <div style="padding-left:0px;font-weight:bold">Enter Number of Participants</div>
+      <% if current_user.standard? %>
+        <%= reservation.input :customer_first_name, :as => :hidden, input_html: { value: current_user.firstname} %>
+        <%= reservation.input :customer_last_name, :as => :hidden, input_html: { value: current_user.lastname } %>
+        <%= reservation.input :customer_phone_number, :as => :hidden, input_html: { value: current_user.phone} %>
+        <%= reservation.input :customer_email, :as => :hidden, input_html: { value: current_user.email} %>
+      <% end %>
+
+      <div style="padding-left:0px;font-weight:bold"><small>Enter Number of Participants</small></div>
       <div class="row">
         <div style="padding-left:20px;"><small>600 ft. - $65 per person </small><%= reservation.input_field :six_hundred, collection: 0..15, default: 0, :input_html => {:style => 'width: 25%'} %></div>
         <div style="padding-left:20px;"><small>800 ft. - $75 per person </small><%= reservation.input_field :eight_hundred, collection: 0..15, default: 0, :input_html => {:style => 'width: 25%'} %></div>
       </div><br>
-      <span style="padding-left:0px;font-weight:bold">Number of Photo Packages</span>
+      <span style="padding-left:0px;font-weight:bold"><small>Number of Photo Packages</small></span>
       <div style="padding-left:10px;"><small>$30 each </small><%= reservation.input_field :photo, collection: 0..5, default: 0, :input_html => {:style => 'width: 25%'} %></div><br>
-      <span style="padding-left:0px;font-weight:bold">Discount Code</span>
+      <span style="padding-left:0px;font-weight:bold"><small>Discount Code</small></span>
       <div><%= reservation.input_field :discount, placeholder: "Only one code allowed", :input_html => {:style => 'width: 65%'}%></div>
       <% if current_user.admin? %>
       <small>
@@ -98,9 +105,16 @@
       <% end %>
     <small><%= reservation.input :comments %></small>
 
-      <span style="padding-left:0px;font-weight:bold; text-align:center"><%= reservation.submit class: 'btn btn-success' %></span>
 
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+            data-description="Parasail Reservation"
+            data-panel-label="Enter Card Info"
+            data-label="Continue"
+           </script>
     <% end %>
+    <br><span style="color:red"><small>* You will not be charged at this time.<br>
+    See 'Policies' for more info.</small></span>
   </div>
 </div>
 

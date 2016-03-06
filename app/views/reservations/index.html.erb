@@ -23,14 +23,14 @@
     <div class="row">
       <%= link_to reservation.date, reservation %>&nbsp |
       <%= reservation.time %> | <span style="color:orange"><%= reservation.total_flights %></span> |
-      <%= reservation.user.lastname %>, <%= reservation.user.firstname %> | <%= reservation.user.phone %> <br>
+      <%= reservation.user.lastname %>, <%= reservation.user.firstname %> | <%= reservation.user.phone %> | userID: <%= reservation.user.id %><br>
     </div>
     <% elsif reservation.user.admin? %>
     <div class="row">
       <%= link_to reservation.date, reservation %>&nbsp |
       <%= reservation.time %> | <span style="color:orange"><%= reservation.total_flights %></span> |
       <%= reservation.customer_last_name %>, <%= reservation.customer_first_name %>
-       | <%= reservation.customer_phone_number %> <br>
+       | <%= reservation.customer_phone_number %> | userID: <%= reservation.user.id %> <br>
     </div>
     <% end %>
   <% end %>

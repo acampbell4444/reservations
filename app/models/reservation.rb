@@ -8,12 +8,14 @@ class Reservation < ActiveRecord::Base
   validates :six_hundred, :inclusion => {:in => 0..15}, presence: true
   validates :eight_hundred, :inclusion => {:in => 0..15}, presence: true
   validates :time, presence: true
-
-  validates :date, presence: true
+  validates :customer_email,presence: true
+  validates :customer_first_name,presence: true
+  validates :customer_last_name,presence: true
+  validates :customer_phone_number,presence: true
   validates :user, presence: true
 
 
-  default_scope { order('date ASC') }
+  default_scope { order('date DESC') }
   default_scope { order('timez ASC') }
 
 def military_time

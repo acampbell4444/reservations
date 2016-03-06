@@ -20,7 +20,7 @@ class PlaydaysController < ApplicationController
       redirect_to show_day
     else
       show_day = Playday.find_by_date(  plus_one_day_formatted )
-      redirect_to show_day 
+      redirect_to show_day
     end
   end
 
@@ -29,6 +29,11 @@ class PlaydaysController < ApplicationController
   end
 
   def show
+    @stripe_btn_data = {
+      key: Rails.configuration.stripe[:publishable_key].to_s,
+      description: "California Parasail Reservation",
+      amount: 0
+    }
     @reservation = Reservation.new
     @playday = Playday.friendly.find(params[:id])#id
   rescue ActiveRecord::RecordNotFound
