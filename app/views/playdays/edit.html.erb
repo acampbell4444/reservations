@@ -1,2 +1,40 @@
-<h1>Playdays#edit</h1>
-<p>Find me in app/views/playdays/edit.html.erb</p>
+<br>
+<div class="jumbotron">
+  <h4>Edit Availabilites for<br><%= @playday.date %></h4>
+<%= simple_form_for @playday, validate: true do |playday| %>
+    <div class="row">
+      <div style="float:left; padding-left:5px;padding-right:20px"><small><small>
+        <%= playday.input :eight_am,  collection: 0..15 %>
+        <%= playday.input :nine_am, collection: 0..15 %>
+        <%= playday.input :ten_am, collection: 0..15 %>
+        <%= playday.input :eleven_am, collection: 0..15 %>
+        <%= playday.input :twelve_pm, collection: 0..15 %>
+        <%= playday.input :one_pm, collection: 0..15 %>
+        <%= playday.input :two_pm, collection: 0..15  %>
+
+        <%= playday.input :three_pm, collection: 0..15  %>
+        <%= playday.input :four_pm, collection: 0..15  %>
+        <%= playday.input :five_pm, collection: 0..15  %>
+        <%= playday.input :six_pm, collection: 0..15 %>
+        <%= playday.input :seven_pm, collection: 0..15 %>
+      </div>
+        <div style="float:left;padding-left :30px; padding-right:20px">
+        <%= playday.input :eight_thirty_am, collection: 0..15 %>
+        <%= playday.input :nine_thirty_am, collection: 0..15 %>
+        <%= playday.input :ten_thirty_am, collection: 0..15 %>
+        <%= playday.input :eleven_thirty_am, collection: 0..15 %>
+        <%= playday.input :twelve_thirty_pm, collection: 0..15 %>
+        <%= playday.input :one_thirty_pm, collection: 0..15 %>
+        <%= playday.input :two_thirty_pm, collection: 0..15 %>
+        <%= playday.input :three_thirty_pm, collection: 0..15 %>
+        <%= playday.input :four_thirty_pm, collection: 0..15 %>
+        <%= playday.input :five_thirty_pm, collection: 0..15 %>
+        <%= playday.input :six_thirty_pm, collection: 0..15 %>
+        <%= playday.input :seven_thirty_pm, collection: 0..15 %>
+      </div>
+    </div><br>
+    <%= playday.button :submit, "Save Changes for #{@playday.date}" %>
+    <% end %></small></small>
+
+      </div>
+    </div>

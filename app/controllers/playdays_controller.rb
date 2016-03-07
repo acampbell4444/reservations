@@ -46,9 +46,19 @@ class PlaydaysController < ApplicationController
   end
 
   def edit
+     @playday = Playday.find(params[:id])
   end
 
   def update
+    @playday = Playday.find(params[:id])
+    @playday.assign_attributes(playday_params)
+    if @playday.save
+      flash[:notice] = "Playday was saved."
+      redirect_to [@playday]
+    else
+      flash.now[:alert] = "There was an error saving the playday. Please try again."
+      render :edit
+    end
   end
 
   def create
@@ -66,4 +76,17 @@ class PlaydaysController < ApplicationController
   def availability?
     params[:commit] == "Check Availability!"
   end
+
+  private
+
+  def playday_params
+    params.require(:playday).permit(
+      :eight_am, :nine_am, :ten_am, :eleven_am, :twelve_pm,
+      :one_pm, :two_pm, :three_pm, :four_pm, :five_pm, :six_pm, :seven_pm,
+      :eight_thirty_am, :nine_thirty_am, :ten_thirty_am, :eleven_thirty_am, 
+      :twelve_thirty_pm, :one_thirty_pm, :two_thirty_pm, :three_thirty_pm, :four_thirty_pm,
+      :five_thirty_pm, :six_thirty_pm, :seven_thirty_pm
+      )
+  end
+
 end
