@@ -25,17 +25,29 @@ class ReservationsController < ApplicationController
 
       times = {
         "8 am" => "eight_am",
+        "830 am" => "eight_thirty_am",
         "9 am" => "nine_am",
+        "930 am" => "nine_thirty_am",
         "10 am" => "ten_am",
+        "1030 am" => "ten_thirty_am",
         "11 am" => "eleven_am",
+        "1130 am" => "eleven_thirty_am",
         "12 pm" => "twelve_pm",
+        "1230 pm" => "twelve_thirty_pm",
         "1 pm" => "one_pm",
+        "130 pm" => "one_thirty_pm",
         "2 pm" => "two_pm",
+        "230 pm" => "two_thirty_pm",
         "3 pm" => "three_pm",
+        "330 pm" => "three_thirty_pm",
         "4 pm" => "four_pm",
+        "430 pm" => "four_thirty_pm",
         "5 pm" => "five_pm",
+        "530 pm" => "five_thirty_pm",
         "6 pm" => "six_pm",
+        "630 pm" => "six_thirty_pm",
         "7 pm" => "seven_pm",
+        "730 pm" => "seven_thirty_pm",
         "8 pm" => "eight_pm",
       }
       @playday = Playday.find_by date: @reservation.date
@@ -71,7 +83,7 @@ class ReservationsController < ApplicationController
              email: @reservation.customer_email || current_user.email,
              description: "customer name: #{@reservation.customer_last_name},
              #{@reservation.customer_first_name}, phone: #{@reservation.customer_phone_number},
-             res. created by user##{@reservation.user.id}",
+             res. created by user##{@reservation.user.id}, reservation date: #{@playday.date}",
              card: params[:stripeToken]
            )
 
@@ -102,28 +114,42 @@ class ReservationsController < ApplicationController
   def update
     @reservation = Reservation.find(params[:id])
     old_playday = Playday.find_by_date(@reservation.date)
+    old_reservation_time = @reservation.time
+    #raise "#{old_reservation_time}"
     six = @reservation.six_hundred || 0
     eight = @reservation.eight_hundred || 0
     old_total_reservations = six + eight
-    @reservation.assign_attributes(reservation_params)
 
+    @reservation.assign_attributes(reservation_params)
     times = {
       "8 am" => "eight_am",
+      "830 am" => "eight_thirty_am",
       "9 am" => "nine_am",
+      "930 am" => "nine_thirty_am",
       "10 am" => "ten_am",
+      "1030 am" => "ten_thirty_am",
       "11 am" => "eleven_am",
+      "1130 am" => "eleven_thirty_am",
       "12 pm" => "twelve_pm",
+      "1230 pm" => "twelve_thirty_pm",
       "1 pm" => "one_pm",
+      "130 pm" => "one_thirty_pm",
       "2 pm" => "two_pm",
+      "230 pm" => "two_thirty_pm",
       "3 pm" => "three_pm",
+      "330 pm" => "three_thirty_pm",
       "4 pm" => "four_pm",
+      "430 pm" => "four_thirty_pm",
       "5 pm" => "five_pm",
+      "530 pm" => "five_thirty_pm",
       "6 pm" => "six_pm",
+      "630 pm" => "six_thirty_pm",
       "7 pm" => "seven_pm",
+      "730 pm" => "seven_thirty_pm",
       "8 pm" => "eight_pm",
     }
 
-    @playday = Playday.find_by date: @reservation.date
+    @playday = Playday.find_by date: @reservation.date  #new playday
     now = Time.at(Time.now.utc + Time.zone_offset('PST'))
     formatted_now = (now.strftime("%m-%d-%Y").to_s)
     if formatted_now >= @reservation.date #&& current_user.standard?
@@ -134,6 +160,7 @@ class ReservationsController < ApplicationController
     eight = @reservation.eight_hundred || 0
     total_reservations = six + eight
     attribute = times[@reservation.time]
+    attribute_two = times[old_reservation_time]
 
 
     if total_reservations == 0
@@ -145,16 +172,27 @@ class ReservationsController < ApplicationController
       return render :edit
     end
 
+#if date and time of the reservation are same
+if (old_playday.date == @reservation.date) && old_reservation_time == @reservation.time
+  if ((@playday.send(attribute) - total_reservations)) + old_total_reservations < 0
+    flash[:alert] = "Too many Seats Selected. Only #{@playday.send(attribute) + old_total_reservations} spots available for #{@reservation.time}."
+    return render :edit
+  end
+  new_num =  "#{(@playday.send(attribute) - total_reservations + old_total_reservations)}"
+  @playday.update_attribute(attribute.to_sym, new_num.to_i)
+else
     if (@playday.send(attribute) - total_reservations) < 0
       flash[:alert] = "Too many Seats Selected. Only #{@playday.send(attribute)} spots available for #{@reservation.time}."
       return render :edit
     end
 
     new_num =  "#{(@playday.send(attribute) - total_reservations)}"
-    @playday.update_attribute(attribute.to_sym, new_num)
 
-    new_count =  "#{(old_playday.send(attribute) + old_total_reservations)}"
-    old_playday.update_attribute(attribute.to_sym, new_count)
+    @playday.update_attribute(attribute.to_sym, new_num.to_i)
+
+    new_count =  "#{(old_playday.send(attribute_two) + old_total_reservations)}"
+    old_playday.update_attribute(attribute_two.to_sym, new_count.to_i)
+  end
 
     if @reservation.save
       flash[:notice] = "Reservation was saved."
@@ -174,17 +212,29 @@ class ReservationsController < ApplicationController
     @playday = Playday.find_by_date(@reservation.date)
     times = {
       "8 am" => "eight_am",
+      "830 am" => "eight_thirty_am",
       "9 am" => "nine_am",
+      "930 am" => "nine_thirty_am",
       "10 am" => "ten_am",
+      "1030 am" => "ten_thirty_am",
       "11 am" => "eleven_am",
+      "1130 am" => "eleven_thirty_am",
       "12 pm" => "twelve_pm",
+      "1230 pm" => "twelve_thirty_pm",
       "1 pm" => "one_pm",
+      "130 pm" => "one_thirty_pm",
       "2 pm" => "two_pm",
+      "230 pm" => "two_thirty_pm",
       "3 pm" => "three_pm",
+      "330 pm" => "three_thirty_pm",
       "4 pm" => "four_pm",
+      "430 pm" => "four_thirty_pm",
       "5 pm" => "five_pm",
+      "530 pm" => "five_thirty_pm",
       "6 pm" => "six_pm",
+      "630 pm" => "six_thirty_pm",
       "7 pm" => "seven_pm",
+      "730 pm" => "seven_thirty_pm",
       "8 pm" => "eight_pm",
     }
     six = @reservation.six_hundred || 0

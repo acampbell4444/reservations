@@ -8,7 +8,8 @@
       <strong>Time<br></strong>
       <div class="row">
         <div style="float:left; padding-left:20px; ">
-          <small><%= reservation.input_field :time, collection: ["8 am","9 am","10 am", "11 am", "12 pm", "1 pm", "2 pm","3 pm", "4 pm", "5 pm", "6 pm", "7 pm"] %></small><br><br>
+          <small><%= reservation.input_field :time, collection: ["8 am","830 am","9 am","930 am","10 am","1030 am", "11 am","1130 am",
+             "12 pm","1230 pm", "1 pm", "130 pm","2 pm","230 pm","3 pm","330 pm", "4 pm","430 pm", "5 pm","530 pm", "630 pm","7 pm", "730 pm"] %></small><br><br>
 
       <span style="padding-left:0px;font-weight:bold">Date</span>
       <br><%= reservation.input :date, placeholder: "Pick Date", label: false, :input_html => {:style => 'color: green; float: left; width: 62%'} %><br><br>

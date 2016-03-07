@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160305213939) do
+ActiveRecord::Schema.define(version: 20160307003458) do
 
   create_table "calculators", force: :cascade do |t|
     t.integer  "eight_hundred"
@@ -51,9 +51,22 @@ ActiveRecord::Schema.define(version: 20160305213939) do
     t.integer  "seven_pm"
     t.integer  "eight_pm"
     t.string   "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "slug"
+    t.integer  "eight_thirty"
+    t.integer  "eight_thirty_am"
+    t.integer  "nine_thirty_am"
+    t.integer  "ten_thirty_am"
+    t.integer  "eleven_thirty_am"
+    t.integer  "twelve_thirty_pm"
+    t.integer  "one_thirty_pm"
+    t.integer  "two_thirty_pm"
+    t.integer  "three_thirty_pm"
+    t.integer  "four_thirty_pm"
+    t.integer  "five_thirty_pm"
+    t.integer  "six_thirty_pm"
+    t.integer  "seven_thirty_pm"
   end
 
   add_index "playdays", ["slug"], name: "index_playdays_on_slug"
