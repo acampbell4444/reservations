@@ -3,6 +3,7 @@ class Reservation < ActiveRecord::Base
   attr_accessor :slug
   before_save :military_time
   after_create :update_playday_slots
+  after_create :new_reservation
 
   belongs_to :user
   validates :six_hundred, :inclusion => {:in => 0..15}, presence: true
@@ -70,32 +71,9 @@ def military_time
     self.timez = 1930
   end
 end
-=begin  def military_time
-  converts = {
-    "8 am" => 800,
-    "9 am" => 900,
-    "10 am" => 1000,
-    "11 am" => 1100,
-    "12 pm" => 1200,
-    "1 pm" => 1300,
-    "2 pm" => 1400,
-    "3 pm" => 1500,
-    "4 pm" => 1600,
-    "5 pm" => 1700,
-    "6 pm" => 1800,
-    "7 pm" => 1900,
-    "8 pm" => 2000,
-  }
-    self.timez = (self.time[converts]).to_s
-  end
-=end
-
-  default_scope { order('timez ASC') }
-
 
   extend FriendlyId
     friendly_id :playday_id, use: :slugged
-
 
     time = {
       "8 am" => 800,
@@ -165,6 +143,10 @@ end
 
   def total_estimate
     six + eight + photos #-discount
+  end
+
+  def new_reservation
+    NewreservationMailer.new_reservation(self).deliver_now
   end
 
   def six
