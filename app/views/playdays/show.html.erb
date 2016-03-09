@@ -1,14 +1,18 @@
 <div class="">
-  <div style="float">
+  <div style="">
     <% now = Time.at(Time.now.utc + Time.zone_offset('PST')) %>
     <% formatted_now = (now.strftime("%m-%d-%Y").to_s) %>
-    <h2><%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %b %d") %></h2>
+    <h2><%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %B %d") %></h2>
   </div>
-  <span style="font-weight:bold;color:orange">
+  <div class="row">
+    <div style="padding-left:40px">
+  <span style="font-weight:bold;color:green;font-family:italic;">
     <%= form_for :playday, :defaults => {:required => false},url: :playdays do |f| %>
       Change Date <span class="glyphicon glyphicon-arrow-right">&nbsp </span><%= f.text_field :date, placeholder: "Pick Date", label: false %>
       <% end %><br>
     </span>
+  </div>
+  </div>
 
   </div>
 <% unless current_user.present? %>
@@ -123,8 +127,9 @@
     </tbody>
   </table>
   <div class="row">
-  <%= link_to "Make a Reservation", new_user_registration_path, class: 'btn btn-success btn-xl' %><br>
-  <%= link_to "Manage your Reservations", new_user_session_path, class: 'btn btn-primary btn-xl' %><br><br>
+    <%= link_to "Make a Reservation", new_user_registration_path, class: 'btn btn-success btn-xl' %>
+    <%= link_to "Manage your Reservations", new_user_session_path, class: 'btn btn-primary btn-xl' %><br><br>
+  </div>
               <% if false %><% if (current_user.nil? || current_user.standard?) && (@playday.date <= formatted_now) %>
                 <span style="color:red"> <small><small>* Online reservations must be made by 8pm on the night prior to activity.<br>
                 To reserve by phone call 310-510-1777.</small></small></span>
