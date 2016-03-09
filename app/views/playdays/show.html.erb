@@ -2,22 +2,24 @@
   <div style="">
     <% now = Time.at(Time.now.utc + Time.zone_offset('PST')) %>
     <% formatted_now = (now.strftime("%m-%d-%Y").to_s) %>
-    <% if current_user.present? && current_user.admin? %>
-     <%= link_to "Edit Availabilities", edit_playday_path(@playday), class: 'btn btn-success btn-xs' %><br>
-    <% end %>
-    <h2><%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %B %d") %></h2>
 
-  </div>
-  <div class="row">
-    <div style="padding-left:40px">
-  <span style="font-weight:bold;color:red;font-family:italic;">
-    <%= form_for :playday, :defaults => {:required => false},url: :playdays do |f| %>
-      Change Date <span class="glyphicon glyphicon-arrow-right">&nbsp </span>
-      <%= f.text_field :date, placeholder: "Pick Date", label: false %>
-      <% end %>
-    </span>
-  </div>
-  </div>
+
+    <% unless current_user.present? %>
+    <h2><%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %B %d") %></h2>
+    <% end %>
+   </div>
+     <% unless current_user.present? %>
+       <div class="row">
+         <div style="padding-left:40px">
+           <span style="color:black;font-family:italic;">
+           <%= form_for :playday, :defaults => {:required => false},url: :playdays do |f| %>
+            View by Date <span class="glyphicon glyphicon-arrow-right">&nbsp </span>
+             <%= f.text_field :date, placeholder: "Pick Date", label: false %>
+           <% end %>
+         </span>
+        </div>
+      </div>
+    <% end %>
 
   </div>
 <% unless current_user.present? %>
@@ -136,36 +138,54 @@
     <%= link_to "Manage your Reservations", new_user_session_path, class: 'btn btn-primary btn-xl' %><br><br>
   </div>
               <% if false %><% if (current_user.nil? || current_user.standard?) && (@playday.date <= formatted_now) %>
-                <span style="color:red"> <small><small>* Online reservations must be made by 8pm on the night prior to activity.<br>
+                <span style="color:white"> <small><small>* Online reservations must be made by 8pm on the night prior to activity.<br>
                 To reserve by phone call 310-510-1777.</small></small></span>
               <% end %>
               <% end %>
 <% end %>
 
 <% if current_user.present? %>
-<div style="float:left">
-  <div class="">
+<div style="width: 1000px;height: 1200px;border: 2px solid black;border-radius: 25px; background: url('http://s3-media4.fl.yelpcdn.com/bphoto/I5Onv6J6-CbFvJhA1OyiiA/o.jpg') no-repeat center center fixed;
+			  -webkit-background-size: cover;
+			  -moz-background-size: cover;
+			  -o-background-size: cover;
+			  background-size: cover;">
+  <div style="padding-left:30px">
+    <h3 style="color:white">Make a Reservation!</h3>
+
+    <div class="row">
+      <div style="padding-left:20px; padding-top:10px">
+        <span style="color:black;font-weight:bold;">Date
+        <%= form_for :playday, :defaults => {:required => false},url: :playdays do |f| %>
+          <%= f.text_field :date, placeholder: "Pick Date", label: false %>
+        <% end %>
+      </span>
+     </div>
+    </div>
+    <% if current_user.admin? %><br>
+       <%= link_to "Edit Availabilities", edit_playday_path(@playday), class: 'btn btn-success btn-xs' %><br>
+    <% end %>
 
     <%= simple_form_for @reservation, validate: true do |reservation| %>
-      <br><small><strong>Time<br></strong></small>
+      <br><span style="color:black"><small><strong>Time<br></strong></small></span>
       <div class="row">
-        <div style="float:left; padding-left:20px">
+        <div style="float:left; padding-left:20px;color:black">
           <small><%= reservation.input_field :time, as: :radio_buttons, collection: ["8 am","9 am","10 am", "11 am", "12 pm", "1 pm", "2 pm","3 pm", "4 pm", "5 pm", "6 pm", "7 pm"], checked: "" %></small>
         </div>
         <div style="float:left; padding-left:5px">
           <small>
-            <div style="padding-top: 10px; color: blue"> &nbsp&nbsp <%= @playday.eight_am || nil%> seats available</div>
-            <div style="padding-top: 9px; color: blue"> &nbsp&nbsp <%= @playday.nine_am || nil%> seats available </div>
-            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.ten_am || nil %> seats available</div>
-            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.eleven_am || nil%> seats available</div>
-            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.twelve_pm || nil%> seats available</div>
-            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.one_pm || nil%> seats available</div>
-            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.two_pm || nil%> seats available</div>
-            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.three_pm || nil%> seats available</div>
-            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.four_pm || nil%> seats available</div>
-            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.five_pm || nil%> seats available</div>
-            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.six_pm || nil%> seats available</div>
-            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.seven_pm || nil %> seats available</div><br>
+            <div style="padding-top: 10px; color: black"> &nbsp&nbsp <%= @playday.eight_am || nil%> seats available</div>
+            <div style="padding-top: 9px; color: black"> &nbsp&nbsp <%= @playday.nine_am || nil%> seats available </div>
+            <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.ten_am || nil %> seats available</div>
+            <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.eleven_am || nil%> seats available</div>
+            <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.twelve_pm || nil%> seats available</div>
+            <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.one_pm || nil%> seats available</div>
+            <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.two_pm || nil%> seats available</div>
+            <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.three_pm || nil%> seats available</div>
+            <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.four_pm || nil%> seats available</div>
+            <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.five_pm || nil%> seats available</div>
+            <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.six_pm || nil%> seats available</div>
+            <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.seven_pm || nil %> seats available</div><br>
             </small>
         </div>
 
@@ -175,18 +195,18 @@
           </div>
           <div style="float:left; padding-left:5px">
             <small>
-              <div style="padding-top: 10px; color: blue"> &nbsp&nbsp <%= @playday.eight_thirty_am || nil%> seats available</div>
-              <div style="padding-top: 9px; color: blue"> &nbsp&nbsp <%= @playday.nine_thirty_am || nil%> seats available </div>
-              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.ten_thirty_am || nil %> seats available</div>
-              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.eleven_thirty_am || nil%> seats available</div>
-              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.twelve_thirty_pm || nil%> seats available</div>
-              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.one_thirty_pm || nil%> seats available</div>
-              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.two_thirty_pm || nil%> seats available</div>
-              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.three_thirty_pm || nil%> seats available</div>
-              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.four_thirty_pm || nil%> seats available</div>
-              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.five_thirty_pm || nil%> seats available</div>
-              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.six_thirty_pm || nil%> seats available</div>
-              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.seven_thirty_pm || nil %> seats available</div><br>
+              <div style="padding-top: 10px; color: black"> &nbsp&nbsp <%= @playday.eight_thirty_am || nil%> seats available</div>
+              <div style="padding-top: 9px; color: black"> &nbsp&nbsp <%= @playday.nine_thirty_am || nil%> seats available </div>
+              <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.ten_thirty_am || nil %> seats available</div>
+              <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.eleven_thirty_am || nil%> seats available</div>
+              <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.twelve_thirty_pm || nil%> seats available</div>
+              <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.one_thirty_pm || nil%> seats available</div>
+              <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.two_thirty_pm || nil%> seats available</div>
+              <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.three_thirty_pm || nil%> seats available</div>
+              <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.four_thirty_pm || nil%> seats available</div>
+              <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.five_thirty_pm || nil%> seats available</div>
+              <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.six_thirty_pm || nil%> seats available</div>
+              <div style="padding-top: 8px; color: black"> &nbsp&nbsp <%= @playday.seven_thirty_pm || nil %> seats available</div><br>
               </small>
           </div>
         <% end %>
@@ -212,13 +232,13 @@
       <div><%= reservation.input_field :discount, placeholder: "Only one code allowed", :input_html => {:style => 'width: 65%'}%></div>
       <% if current_user.admin? %>
       <small>
-      <br> <%= reservation.input :customer_email %>
-       <%= reservation.input :customer_first_name %>
-       <%= reservation.input :customer_last_name %>
-      <%= reservation.input :customer_phone_number %>
+      <br> <%= reservation.input :customer_email, :input_html => {:style => 'width: 35%'} %>
+       <%= reservation.input :customer_first_name, :input_html => {:style => 'width: 35%'} %>
+       <%= reservation.input :customer_last_name, :input_html => {:style => 'width: 35%'} %>
+      <%= reservation.input :customer_phone_number, :input_html => {:style => 'width: 35%'} %>
     </small>
       <% end %>
-    <small><%= reservation.input :comments %></small>
+    <small><%= reservation.input :comments, :input_html => {:style => 'width: 35%'} %></small>
 
 
       <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -228,9 +248,10 @@
             data-label="Continue"
            </script>
     <% end %>
-    <br><span style="color:red"><small>* You will not be charged at this time.<br>
+    <br><span style="color:white"><small>* You will not be charged at this time.
     See 'Policies' for more info.</small></span>
   </div>
+</div>
 </div>
 
 
