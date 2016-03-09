@@ -1,15 +1,20 @@
-<div class="">
+<div class="row">
   <div style="">
     <% now = Time.at(Time.now.utc + Time.zone_offset('PST')) %>
     <% formatted_now = (now.strftime("%m-%d-%Y").to_s) %>
+    <% if current_user.present? && current_user.admin? %>
+     <%= link_to "Edit Availabilities", edit_playday_path(@playday), class: 'btn btn-success btn-xs' %><br>
+    <% end %>
     <h2><%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %B %d") %></h2>
+
   </div>
   <div class="row">
     <div style="padding-left:40px">
-  <span style="font-weight:bold;color:green;font-family:italic;">
+  <span style="font-weight:bold;color:red;font-family:italic;">
     <%= form_for :playday, :defaults => {:required => false},url: :playdays do |f| %>
-      Change Date <span class="glyphicon glyphicon-arrow-right">&nbsp </span><%= f.text_field :date, placeholder: "Pick Date", label: false %>
-      <% end %><br>
+      Change Date <span class="glyphicon glyphicon-arrow-right">&nbsp </span>
+      <%= f.text_field :date, placeholder: "Pick Date", label: false %>
+      <% end %>
     </span>
   </div>
   </div>
@@ -138,135 +143,55 @@
 <% end %>
 
 <% if current_user.present? %>
-  <% if current_user.admin? %>
-    <%= link_to "Edit Availabilities", edit_playday_path(@playday), class: 'btn btn-success btn-xs' %><br>
-  <% end %>
-<div class="height:100px"
-  <%= simple_form_for @reservation, validate: true do |reservation| %>
-  <table class="table table-condensed" width="647">
-    <thead>
-      <tr>
-        <th style="font-size:12px">Time</th>
-        <th style="font-size:12px">SpacesAvailable</th>
-        <% unless @playday.dirty_thirties_off? %>
-          <th style="font-size:12px">Time</th>
-          <th style="font-size:12px">SpacesAvailable</th>
-        <% end %>
-      </tr>
-    </thead>
-    <tbody>
-      <tr style="font-size:12px">
-        <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["8 am"] %></td>
-        <td style="padding-top:18px"><%= @playday.eight_am || nil%></td>
-        <% unless @playday.dirty_thirties_off? %>
-          <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["830 am"] %></td>
-          <td style="padding-top:18px"><%= @playday.eight_thirty_am || nil%></td>
-        <% end %>
-      </tr>
-      <tr style="font-size:12px">
-        <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["9 am"] %></td>
-        <td style="padding-top:18px"><%= @playday.nine_am || nil%></td>
-        <% unless @playday.dirty_thirties_off? %>
-          <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["930 am"] %></td>
-          <td style="padding-top:18px"><%= @playday.nine_thirty_am || nil%></td>
-        <% end %>
-      </tr>
-      <tr style="font-size:12px">
-        <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["10 am"] %></td>
-        <td style="padding-top:18px;"><%= @playday.ten_am || nil%></td>
-        <% unless @playday.dirty_thirties_off? %>
-          <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["1030 am"] %></td>
-          <td style="padding-top:18px"><%= @playday.ten_thirty_am || nil%></td>
-        <% end %>
-      </tr>
-      <tr style="font-size:12px">
-        <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["11 am"] %></td>
-        <td style="padding-top:18px"><%= @playday.eleven_am || nil%></td>
-        <% unless @playday.dirty_thirties_off? %>
-          <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["1130 am"] %></td>
-          <td style="padding-top:18px"><%= @playday.eleven_thirty_am || nil%></td>
-        <% end %>
-      </tr>
-      <tr style="font-size:12px">
-        <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["12 pm"] %></td>
-        <td style="padding-top:18px"><%= @playday.twelve_pm || nil%></td>
-        <% unless @playday.dirty_thirties_off? %>
-          <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["1230 pm"] %></td>
-          <td style="padding-top:18px"><%= @playday.twelve_thirty_pm || nil%></td>
-        <% end %>
-      </tr>
-      <tr style="font-size:12px">
-        <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["1 pm"] %></td>
-        <td style="padding-top:18px"><%= @playday.one_pm || nil%></td>
-        <% unless @playday.dirty_thirties_off? %>
-          <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["130 pm"] %></td>
-          <td style="padding-top:18px"><%= @playday.one_thirty_pm || nil%></td>
-        <% end %>
-      </tr>
-      <tr style="font-size:12px">
-        <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["2 pm"] %></td>
-        <td style="padding-top:18px"><%= @playday.two_pm || nil%></td>
-        <% unless @playday.dirty_thirties_off? %>
-          <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["230 pm"] %></td>
-          <td style="padding-top:18px"><%= @playday.two_thirty_pm || nil%></td>
-        <% end %>
-      </tr>
-      <tr style="font-size:12px">
-        <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["3 pm"] %></td>
-        <td style="padding-top:18px"><%= @playday.three_pm || nil%></td>
-        <% unless @playday.dirty_thirties_off? %>
-          <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["330 pm"] %></td>
-          <td style="padding-top:18px"><%= @playday.three_thirty_pm || nil%></td>
-        <% end %>
-      </tr>
-      <tr style="font-size:12px">
-        <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["4 pm"] %></td>
-        <td style="padding-top:18px"><%= @playday.four_pm || nil%></td>
-        <% unless @playday.dirty_thirties_off? %>
-          <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["430 pm"] %></td>
-          <td style="padding-top:18px"><%= @playday.four_thirty_pm || nil%></td>
-        <% end %>
-      </tr>
-      <tr style="font-size:12px">
-        <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["5 pm"] %></td>
-        <td style="padding-top:18px"><%= @playday.five_pm || nil%></td>
-        <% unless @playday.dirty_thirties_off? %>
-          <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["530 pm"] %></td>
-          <td style="padding-top:18px"><%= @playday.five_thirty_pm || nil%></td>
-        <% end %>
-      </tr>
-      <tr >
-        <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["6 pm"] %></td>
-        <td style="padding-top:18px"><%= @playday.six_pm || nil%></td>
-        <% unless @playday.dirty_thirties_off? %>
-          <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["630 pm"] %></td>
-          <td style="padding-top:18px"><%= @playday.six_thirty_pm || nil%></td>
-        <% end %>
-      </tr>
-      <tr>
-        <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["7 pm"] %></td>
-        <td style="padding-top:18px"><%= @playday.seven_pm || nil%></td>
-        <% unless @playday.dirty_thirties_off? %>
-          <td> <%= reservation.input_field :time, as: :radio_buttons, collection: ["730 pm"] %></td>
-          <td style="padding-top:18px"><%= @playday.seven_thirty_pm || nil%></td>
-        <% end %>
-      </tr>
-    </tbody>
-  </table>
+<div style="float:left">
+  <div class="">
 
+    <%= simple_form_for @reservation, validate: true do |reservation| %>
+      <br><small><strong>Time<br></strong></small>
+      <div class="row">
+        <div style="float:left; padding-left:20px">
+          <small><%= reservation.input_field :time, as: :radio_buttons, collection: ["8 am","9 am","10 am", "11 am", "12 pm", "1 pm", "2 pm","3 pm", "4 pm", "5 pm", "6 pm", "7 pm"], checked: "" %></small>
+        </div>
+        <div style="float:left; padding-left:5px">
+          <small>
+            <div style="padding-top: 10px; color: blue"> &nbsp&nbsp <%= @playday.eight_am || nil%> seats available</div>
+            <div style="padding-top: 9px; color: blue"> &nbsp&nbsp <%= @playday.nine_am || nil%> seats available </div>
+            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.ten_am || nil %> seats available</div>
+            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.eleven_am || nil%> seats available</div>
+            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.twelve_pm || nil%> seats available</div>
+            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.one_pm || nil%> seats available</div>
+            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.two_pm || nil%> seats available</div>
+            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.three_pm || nil%> seats available</div>
+            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.four_pm || nil%> seats available</div>
+            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.five_pm || nil%> seats available</div>
+            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.six_pm || nil%> seats available</div>
+            <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.seven_pm || nil %> seats available</div><br>
+            </small>
+        </div>
 
+        <% unless @playday.dirty_thirties_off? %>
+          <div style="float:left; padding-left:40px">
+          <small><%= reservation.input_field :time, as: :radio_buttons, collection: ["830 am","930 am","1030 am", "1130 am", "1230 pm", "130 pm", "230 pm","330 pm", "430 pm", "530 pm", "630 pm", "730 pm"], checked: "" %></small>
+          </div>
+          <div style="float:left; padding-left:5px">
+            <small>
+              <div style="padding-top: 10px; color: blue"> &nbsp&nbsp <%= @playday.eight_thirty_am || nil%> seats available</div>
+              <div style="padding-top: 9px; color: blue"> &nbsp&nbsp <%= @playday.nine_thirty_am || nil%> seats available </div>
+              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.ten_thirty_am || nil %> seats available</div>
+              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.eleven_thirty_am || nil%> seats available</div>
+              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.twelve_thirty_pm || nil%> seats available</div>
+              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.one_thirty_pm || nil%> seats available</div>
+              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.two_thirty_pm || nil%> seats available</div>
+              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.three_thirty_pm || nil%> seats available</div>
+              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.four_thirty_pm || nil%> seats available</div>
+              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.five_thirty_pm || nil%> seats available</div>
+              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.six_thirty_pm || nil%> seats available</div>
+              <div style="padding-top: 8px; color: blue"> &nbsp&nbsp <%= @playday.seven_thirty_pm || nil %> seats available</div><br>
+              </small>
+          </div>
+        <% end %>
+    </div>
 
-       </div>
-
-
-
-      <%= reservation.input :date, :as => :hidden, input_html: { value: @playday.date } %>
-      <% if current_user.standard? %>
-        <%= reservation.input :customer_first_name, :as => :hidden, input_html: { value: current_user.firstname} %>
-        <%= reservation.input :customer_last_name, :as => :hidden, input_html: { value: current_user.lastname } %>
-        <%= reservation.input :customer_phone_number, :as => :hidden, input_html: { value: current_user.phone} %>
-        <%= reservation.input :customer_email, :as => :hidden, input_html: { value: current_user.email} %>
-      <% end %>
 
       <div style="padding-left:0px;font-weight:bold"><small>Enter Number of Participants</small></div>
       <div class="row">
@@ -276,6 +201,14 @@
       <span style="padding-left:0px;font-weight:bold"><small>Number of Photo Packages</small></span>
       <div style="padding-left:10px;"><small>$30 each </small><%= reservation.input_field :photo, collection: 0..5, default: 0, :input_html => {:style => 'width: 25%'} %></div><br>
       <span style="padding-left:0px;font-weight:bold"><small>Discount Code</small></span>
+      <%= reservation.input :date, :as => :hidden, input_html: { value: @playday.date } %>
+      <% if current_user.standard? %>
+        <%= reservation.input :customer_first_name, :as => :hidden, input_html: { value: current_user.firstname} %>
+        <%= reservation.input :customer_last_name, :as => :hidden, input_html: { value: current_user.lastname } %>
+        <%= reservation.input :customer_phone_number, :as => :hidden, input_html: { value: current_user.phone} %>
+        <%= reservation.input :customer_email, :as => :hidden, input_html: { value: current_user.email} %>
+      <% end %>
+
       <div><%= reservation.input_field :discount, placeholder: "Only one code allowed", :input_html => {:style => 'width: 65%'}%></div>
       <% if current_user.admin? %>
       <small>

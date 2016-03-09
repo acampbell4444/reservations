@@ -46,11 +46,11 @@ class PlaydaysController < ApplicationController
   end
 
   def edit
-     @playday = Playday.find(params[:id])
+      @playday = Playday.friendly.find(params[:id])
   end
 
   def update
-    @playday = Playday.find(params[:id])
+    @playday = Playday.friendly.find(params[:id])
     @playday.assign_attributes(playday_params)
     if @playday.save
       flash[:notice] = "Playday was saved."
