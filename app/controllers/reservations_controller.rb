@@ -55,7 +55,7 @@ class ReservationsController < ApplicationController
       formatted_plus_4 = (now_plus_4.strftime("%m-%d-%Y").to_s)
       formatted_plus_4
       if formatted_plus_4 >= @reservation.date && current_user.standard?
-        flash[:alert] = "Online reservations must be made by no later than 8pm on the day before the activity. No online reservation dates
+        flash[:alert] = "Reservation was not Saved! Online reservations must be made by no later than 8pm on the day before the activity. No online reservation dates
         can be later than #{Playday.last.date}. To reserve by phone call 310-510-1777."
         return redirect_to :back
       end
@@ -65,15 +65,15 @@ class ReservationsController < ApplicationController
       total_reservations = six + eight
       attribute = times[@reservation.time]
       if total_reservations == 0
-        flash[:alert] = "Must Choose at least One Passenger."
+        flash[:alert] = "Reservation was not Saved! Must Choose at least One Passenger."
         return redirect_to :back
     end
     if attribute.nil?
-      flash[:alert] = "Must choose a Departure Time"
+      flash[:alert] = "Reservation was not Saved! Must choose a Departure Time"
       return redirect_to request.referrer
     end
       if (@playday.send(attribute) - total_reservations) < 0
-        flash[:alert] = "Too many Seats Selected. Only #{@playday.send(attribute)} spots available for #{@reservation.time}."
+        flash[:alert] = "Reservation was not Saved! Too many Seats Selected. Only #{@playday.send(attribute)} spots available for #{@reservation.time}."
         return redirect_to :back
       end
 

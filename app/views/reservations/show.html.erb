@@ -1,4 +1,5 @@
 <div class="jumbotron">
+  <div style="padding-left:20px">
 <h3>This is Your Reservation Info!</h3>
 <% if current_user.admin? && @reservation.user.admin? %><strong>
 Customer Name: <%= @reservation.customer_last_name %>, <%= @reservation.customer_first_name %><br>
@@ -37,4 +38,5 @@ to update your contact info
 
 <%= link_to "Edit Reservation", edit_reservation_path(@reservation), class: 'btn btn-success btn-xs' %>
 <%= link_to "Cancel Reservation", [@reservation], method: :delete, class: 'btn btn-danger btn-xs', data: { confirm: 'Are you sure you want to delete this Reservation?' } %></br>
+</div>
 </div>
