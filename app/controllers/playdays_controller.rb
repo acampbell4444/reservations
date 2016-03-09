@@ -83,7 +83,7 @@ class PlaydaysController < ApplicationController
     params.require(:playday).permit(
       :eight_am, :nine_am, :ten_am, :eleven_am, :twelve_pm,
       :one_pm, :two_pm, :three_pm, :four_pm, :five_pm, :six_pm, :seven_pm,
-      :eight_thirty_am, :nine_thirty_am, :ten_thirty_am, :eleven_thirty_am, 
+      :eight_thirty_am, :nine_thirty_am, :ten_thirty_am, :eleven_thirty_am,
       :twelve_thirty_pm, :one_thirty_pm, :two_thirty_pm, :three_thirty_pm, :four_thirty_pm,
       :five_thirty_pm, :six_thirty_pm, :seven_thirty_pm
       )

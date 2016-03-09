@@ -19,8 +19,17 @@
 //= require rails.validations.simple_form
 //= require_tree .
 
+
 $(function() {
-  $("#playday_date").datepicker({ minDate: 0 , dateFormat: 'mm-dd-yy' });
+  $("#playday_date").datepicker({
+    minDate: 0 ,
+     dateFormat: 'mm-dd-yy',
+
+     onSelect: function (dateText, inst) {
+				$(this).parent('form').submit();
+			}
+
+    });
 });
 
 var $j = jQuery.noConflict()
