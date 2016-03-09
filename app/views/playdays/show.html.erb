@@ -1,7 +1,7 @@
 
 <% unless current_user.present? %>
 
-    <div style="float:left">
+    <div style="float:left; font-family: arial-black">
     <div class="jumbotron">
       <div class="row">
         <div style="float:left; padding-left:20px">
@@ -51,7 +51,7 @@
     </div>
 
       <div class="row">
-        <div style="padding-right: 20px; padding-left:5px">
+        <div style="padding-right: 20px; padding-left:5px;">
           <h3>To Make a Reservation...</h3>
           <div style="padding-left:30px">
           <div class="row">
@@ -72,10 +72,8 @@
         <% end %>
 
 <% if current_user.present? %>
-<div style="float:left">
+<div style="float:left; font-family:arial-black;">
   <div class="jumbotron">
-    <span style="font-size:20px; color:blue"><span class="glyphicon glyphicon-arrow-up"></span></span><small><small>
-    use the availability selector to<br> chose a new reservation date </small></small><br>
     <% today = Date.today.strftime('%m-%d-%Y') %>
     <% if current_user.standard? && (@playday.date <= today) %>
     <span style="color:red"><small><small>*Online reservations can only be made by 8pm on the night prior to the activity. Call 310-510-1777 to reserve by phone</small></small></span><br>
