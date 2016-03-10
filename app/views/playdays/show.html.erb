@@ -1,29 +1,25 @@
-<div class="row">
-  <div style="">
-    <% now = Time.at(Time.now.utc + Time.zone_offset('PST')) %>
-    <% formatted_now = (now.strftime("%m-%d-%Y").to_s) %>
 
-
-    <% unless current_user.present? %>
-    <h2><%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %B %d") %></h2>
-    <% end %>
-   </div>
-     <% unless current_user.present? %>
-       <div class="row">
-         <div style="padding-left:40px">
-           <span style="color:black;font-family:italic;">
-           <%= form_for :playday, :defaults => {:required => false},url: :playdays do |f| %>
-            View by Date <span class="glyphicon glyphicon-arrow-right">&nbsp </span>
-             <%= f.text_field :date, placeholder: "Pick Date", label: false %>
-           <% end %>
-         </span>
-        </div>
-      </div>
-    <% end %>
 
   </div>
 <% unless current_user.present? %>
-  <table class="table table-striped" width="647">
+<div style="padding-left:20px;float:left;width: 1000px;height: 1200px;border: 2px solid black;border-radius: 25px; background: url('http://s3-media4.fl.yelpcdn.com/bphoto/I5Onv6J6-CbFvJhA1OyiiA/o.jpg') no-repeat center center fixed;
+			  -webkit-background-size: cover;
+			  -moz-background-size: cover;
+			  -o-background-size: cover;
+			  background-size: cover;">
+        <div class="row">
+        <h4 style="float:left;padding-left:10px;color:white"><br>Select a Date </h4>
+        <div style="padding-top:25px; padding-left:130px">
+         <%= form_for :playday, :defaults => {:required => false},url: :playdays do |f| %>
+          <%= f.text_field :date, label: false,  :autofocus=>true,  :size=>"10" %>
+           <% end %>
+         </div>
+
+        </div><br><br><br><br><br><br><br><br><br><br><br>
+  <h2 style="color:white"><%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %B %d") %></h2>
+
+    <div style="width:440px">
+    <table class="table table-condensed" width="200">
     <thead>
       <tr>
         <th>Time</th>
@@ -133,10 +129,14 @@
       </tr>
     </tbody>
   </table>
+</div>
   <div class="row">
+    <div style="padding-left:25px">
     <%= link_to "Make a Reservation", new_user_registration_path, class: 'btn btn-success btn-xl' %>
     <%= link_to "Manage your Reservations", new_user_session_path, class: 'btn btn-primary btn-xl' %><br><br>
   </div>
+  </div>
+
               <% if false %><% if (current_user.nil? || current_user.standard?) && (@playday.date <= formatted_now) %>
                 <span style="color:white"> <small><small>* Online reservations must be made by 8pm on the night prior to activity.<br>
                 To reserve by phone call 310-510-1777.</small></small></span>
@@ -151,7 +151,7 @@
 			  -o-background-size: cover;
 			  background-size: cover;">
   <div style="padding-left:30px">
-    <h3 style="color:white">Make a Reservation with Parasail Catalina!</h3>
+    <h3 style="color:white">Make a Reservation!</h3>
 
     <div class="row">
       <div style="padding-left:20px; padding-top:10px">
