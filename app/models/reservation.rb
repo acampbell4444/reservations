@@ -4,6 +4,7 @@ class Reservation < ActiveRecord::Base
   before_save :military_time
   after_create :update_playday_slots
   after_create :new_reservation
+  after_update :update_reservation
 
   belongs_to :user
   validates :six_hundred, :inclusion => {:in => 0..15}, presence: true
@@ -147,6 +148,10 @@ end
 
   def new_reservation
     NewreservationMailer.new_reservation(self).deliver_now
+  end
+
+  def update_reservation
+    UpdateReservationMailer.update_reservation(self).deliver_now
   end
 
   def six

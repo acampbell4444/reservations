@@ -1,7 +1,8 @@
 <% if current_user.present? %><br>
 <div style="float:left">
   <div class="jumbotron">
-    <h3>Update Reservation</h3>
+    <div style="padding-left:20px; padding-right:20px">
+    <h2>Update Reservation</h2><br>
     <small>Reservation No.
     <%= link_to @reservation.id, @reservation %><br>User: <%= @reservation.user.email %></small>
     <%= simple_form_for @reservation, validate: true do |reservation| %><br>
@@ -22,6 +23,13 @@
       <div style="padding-left:10px;"><small>$30 each </small><%= reservation.input_field :photo, collection: 0..5, default: 0, :input_html => {:style => 'width: 25%'} %></div><br>
       <span style="padding-left:0px;font-weight:bold">Discount Code</span>
       <div><%= reservation.input_field :discount, placeholder: "Only one code allowed", :input_html => {:style => 'width: 65%'}%></div><br>
+      <% if current_user.standard? %>
+        <%= reservation.input :customer_first_name, :as => :hidden, input_html: { value: current_user.firstname} %>
+        <%= reservation.input :customer_last_name, :as => :hidden, input_html: { value: current_user.lastname } %>
+        <%= reservation.input :customer_phone_number, :as => :hidden, input_html: { value: current_user.phone} %>
+        <%= reservation.input :customer_email, :as => :hidden, input_html: { value: current_user.email} %>
+      <% end %>
+
       <% if current_user.admin? %>
         <small>
         <br> <%= reservation.input :customer_email %>
@@ -32,6 +40,7 @@
       <% end %>
       <span style="padding-left:0px;font-weight:bold; text-align:center"><%= reservation.submit class: 'btn btn-success' %></span>
     <% end %>
+  </div>
   </div>
 </div>
 

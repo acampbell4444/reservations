@@ -2,6 +2,7 @@
 
   </div>
 <% unless current_user.present? %>
+
 <div style="padding-left:20px;float:left;width: 1000px;height: 1200px;border: 2px solid black;border-radius: 25px; background: url('http://s3-media4.fl.yelpcdn.com/bphoto/I5Onv6J6-CbFvJhA1OyiiA/o.jpg') no-repeat center center fixed;
 			  -webkit-background-size: cover;
 			  -moz-background-size: cover;
@@ -11,12 +12,11 @@
         <h4 style="float:left;padding-left:10px;color:white"><br>Select a Date </h4>
         <div style="padding-top:25px; padding-left:130px">
          <%= form_for :playday, :defaults => {:required => false},url: :playdays do |f| %>
-          <%= f.text_field :date, label: false,  :autofocus=>true,  :size=>"10" %>
+          <%= f.text_field :date, label: false,  :autofocus=>false,
+          style: 'color:orange; font-weight: bold; border:2px solid black;border-radius:20px;text-align:center', :size=>"15" %>
            <% end %>
-         </div>
-
-        </div><br><br><br><br><br><br><br><br><br><br><br>
-  <h2 style="color:white"><%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %B %d") %></h2>
+         </div><br>
+         <h4 style="padding-left:25px;color:white"><%= (Date.strptime(@playday.date, '%m-%d-%Y')).strftime("%A, %B %d") %></h4>
 
     <div style="width:440px">
     <table class="table table-condensed" width="200">
