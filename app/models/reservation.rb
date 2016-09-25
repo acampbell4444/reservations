@@ -3,8 +3,8 @@ class Reservation < ActiveRecord::Base
   attr_accessor :slug
   before_save :military_time
   after_create :update_playday_slots
-  after_create :new_reservation
-  after_update :update_reservation
+  #after_create :new_reservation
+  #after_update :update_reservation
 
   belongs_to :user
   validates :six_hundred, :inclusion => {:in => 0..15}, presence: true
