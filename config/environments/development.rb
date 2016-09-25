@@ -25,8 +25,8 @@ Rails.application.configure do
     user_name: 'alantest44@gmail.com',
     password:  'Notthisbody44!',
     authentication: 'plain',
-    enable_starttls_auto: true
-    openssl_verify_mode: 'none' 
+    enable_starttls_auto: true,
+    openssl_verify_mode: 'none'
   }
 
   # Print deprecation notices to the Rails logger.
